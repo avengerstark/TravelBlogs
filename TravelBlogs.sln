@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelBlogs.WEB", "TravelBlogs.WEB\TravelBlogs.WEB.csproj", "{91714195-54B9-4971-8AE9-A79FBDA5E9CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelBlogs.DAL", "TravelBlogs.DAL\TravelBlogs.DAL.csproj", "{C26727F6-F96E-485E-9A25-A851E62F1C54}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91714195-54B9-4971-8AE9-A79FBDA5E9CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91714195-54B9-4971-8AE9-A79FBDA5E9CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91714195-54B9-4971-8AE9-A79FBDA5E9CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91714195-54B9-4971-8AE9-A79FBDA5E9CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C26727F6-F96E-485E-9A25-A851E62F1C54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C26727F6-F96E-485E-9A25-A851E62F1C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C26727F6-F96E-485E-9A25-A851E62F1C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C26727F6-F96E-485E-9A25-A851E62F1C54}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
