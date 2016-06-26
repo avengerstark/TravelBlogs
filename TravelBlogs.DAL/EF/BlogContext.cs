@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using TravelBlogs.DAL.Entities;
-using System.Data.Entity;
+﻿using TravelBlogs.DAL.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace TravelBlogs.DAL.EF
@@ -14,9 +7,14 @@ namespace TravelBlogs.DAL.EF
     {
         public BlogContext(string connectionString) : base(connectionString) { }
 
+
+
+
+
         protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
-            // Составной ключ
+            
+            // Составной ключ таблицы Follower
             modelBuilder.Entity<Follower>().HasKey(f => new { f.StarUserId, f.FollowerUserId });
 
 

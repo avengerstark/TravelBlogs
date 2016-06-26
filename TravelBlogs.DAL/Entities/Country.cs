@@ -8,5 +8,18 @@ namespace TravelBlogs.DAL.Entities
 {
     public class Country
     {
+        public int PostId { get; set; }
+
+        public string CountryName { get; set; }
+
+        public string Description { get; set; }
+
+
+        public virtual ICollection<Region> Regions { get; set; }
+
+        public Country()
+        {
+            Regions = new List<Region>();
+        }
     }
 }

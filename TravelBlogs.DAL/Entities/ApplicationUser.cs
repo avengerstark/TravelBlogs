@@ -10,8 +10,23 @@ namespace TravelBlogs.DAL.Entities
 {
     public class ApplicationUser : IdentityUser
     {
+        // Связи с внешними ключами
+
         public virtual ICollection<Follower> StarUsers { get; set; }
 
         public virtual ICollection<Follower> FollowerUsers { get; set; }
+
+
+        public virtual Profile Profile { get; set; }
+
+
+        public virtual ICollection<Vote> Votes { get; set; }
+
+        public virtual ICollection<Post> Posts { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
+
+        public virtual ICollection<ReplyToComment> RepliesToComment { get; set; }
+
     }
 }

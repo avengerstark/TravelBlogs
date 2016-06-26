@@ -10,6 +10,7 @@ namespace TravelBlogs.WEB.Controllers
     {
         public ActionResult Index()
         {
+            
             return View();
         }
 

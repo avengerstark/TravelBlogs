@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace TravelBlogs.DAL.Entities
 {
@@ -25,12 +27,25 @@ namespace TravelBlogs.DAL.Entities
         public int CountComments { get; set; }
 
 
-        public string UserId { get; set; }
+        // Связи с первичными ключами
 
-        //public virtual User User { get; set; }
+        public int UserId { get; set; }
+        [ForeignKey("UserId ")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         public int PlaceId { get; set; }
-
+        [ForeignKey("PlaceId")]
         public virtual Place Place { get; set; }
+
+
+        // Связи с внешними ключами
+
+        public virtual ICollection<Vote> Votes { get; set; }
+
+        public Post()
+        {
+            Votes = new List<Vote>();
+        }
+
     }
 }
