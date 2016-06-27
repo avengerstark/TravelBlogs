@@ -1,5 +1,6 @@
 ﻿using TravelBlogs.DAL.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace TravelBlogs.DAL.EF
 {
@@ -7,7 +8,23 @@ namespace TravelBlogs.DAL.EF
     {
         public BlogContext(string connectionString) : base(connectionString) { }
 
+        public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<Country> Countries { get; set; }
+
+        public DbSet<Follower> Followers { get; set; }
+
+        public DbSet<Place> Places { get; set; }
+
+        public DbSet<Post> Posts { get; set; }
+
+        public DbSet<Profile> Profiles { get; set; }
+
+        public DbSet<Region> Regions { get; set; }
+
+        public DbSet<ReplyToComment> RepliesToComments { get; set; }
+
+        public DbSet<Vote> Votes { get; set; }
 
 
 

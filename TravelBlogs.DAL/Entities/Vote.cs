@@ -10,6 +10,7 @@ namespace TravelBlogs.DAL.Entities
 {
     public class Vote
     {
+        [Required]
         public bool IsLike { get; set; }
 
 

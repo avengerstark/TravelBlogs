@@ -11,7 +11,7 @@ namespace TravelBlogs.DAL.Entities
     public class Region
     {
         public int RegionId { get; set; }
-
+        [Required]
         public string RegionName { get; set; }
 
         public string Description { get; set; }

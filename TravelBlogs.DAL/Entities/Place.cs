@@ -11,7 +11,7 @@ namespace TravelBlogs.DAL.Entities
     public class Place
     {
         public int PlaceId { get; set; }
-
+        [Required]
         public string PlaceName { get; set; }
 
         // Временно

@@ -11,13 +11,13 @@ namespace TravelBlogs.DAL.Entities
     public class Post
     {
         public int PostId { get; set; }
-
+        [Required]
         public string Title { get; set; }
-
+        [Required]
         public string Body { get; set; }
-
+        [Required]
         public bool IsApproved { get; set; }
-
+        [Required]
         public DateTime CreateDate { get; set; }
 
         public DateTime ModificationDate { get; set; }

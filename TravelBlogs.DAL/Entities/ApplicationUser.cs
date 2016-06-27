@@ -26,7 +26,16 @@ namespace TravelBlogs.DAL.Entities
 
         public virtual ICollection<Comment> Comments { get; set; }
 
-        public virtual ICollection<ReplyToComment> RepliesToComment { get; set; }
+        public virtual ICollection<ReplyToComment> RepliesToComments { get; set; }
+
+
+        public ApplicationUser()
+        {
+            Votes = new List<Vote>();
+            Posts = new List<Post>();
+            Comments = new List<Comment>();
+            RepliesToComments = new List<ReplyToComment>();
+        }
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,9 @@ namespace TravelBlogs.DAL.Entities
     public class ReplyToComment
     {
         public int ReplyToCommentId { get; set; }
-
+        [Required]
         public string TextComment { get; set; }
-
+        [Required]
         public DateTime CreateDate { get; set; }
 
         public bool IsBanned { get; set; }
