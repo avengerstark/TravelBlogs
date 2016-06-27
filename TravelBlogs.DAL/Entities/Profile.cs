@@ -18,8 +18,10 @@ namespace TravelBlogs.DAL.Entities
 
         [Key]
         [ForeignKey("ApplicationUser")]
-        public int UserId { get; set; }
-        
+        public string UserId { get; set; }
+
+
+        //Навигационные свойства
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

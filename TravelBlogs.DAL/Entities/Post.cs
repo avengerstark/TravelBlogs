@@ -29,7 +29,7 @@ namespace TravelBlogs.DAL.Entities
 
         // Связи с первичными ключами
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         [ForeignKey("UserId ")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
@@ -38,7 +38,7 @@ namespace TravelBlogs.DAL.Entities
         public virtual Place Place { get; set; }
 
 
-        // Связи с внешними ключами
+        // Навигационные свойства
 
         public virtual ICollection<Vote> Votes { get; set; }
 

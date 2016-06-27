@@ -23,6 +23,8 @@ namespace TravelBlogs.DAL.Entities
         public virtual Country Country { get; set; }
 
 
+
+        // Навигационные свойства
         public virtual ICollection<Place> Places {get; set;}
 
         public Region()

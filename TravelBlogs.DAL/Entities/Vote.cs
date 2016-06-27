@@ -12,14 +12,12 @@ namespace TravelBlogs.DAL.Entities
     {
         public bool IsLike { get; set; }
 
+
         public int PostId { get; set; }
         [ForeignKey("PostId")]
         public virtual Post Post { get; set; }
 
-
-
-
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 

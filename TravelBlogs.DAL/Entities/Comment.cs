@@ -18,11 +18,13 @@ namespace TravelBlogs.DAL.Entities
         public bool IsBanned { get; set; }
 
         
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
 
+
+        // Навигационные свойства
         public virtual ICollection<ReplyToComment> RepliesToComment { get; set; }
 
         public Comment()

@@ -10,7 +10,7 @@ namespace TravelBlogs.DAL.Entities
 {
     public class ApplicationUser : IdentityUser
     {
-        // Связи с внешними ключами
+        // Навигационные свойства
 
         public virtual ICollection<Follower> StarUsers { get; set; }
 
@@ -24,7 +24,7 @@ namespace TravelBlogs.DAL.Entities
 
         public virtual ICollection<Post> Posts { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<ReplyToComment> RepliesToComment { get; set; }
 

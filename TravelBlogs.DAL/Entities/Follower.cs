@@ -8,7 +8,7 @@ namespace TravelBlogs.DAL.Entities
     {
         public string StarUserId { get; set; }
 
-        public int FollowerUserId { get; set; }
+        public string FollowerUserId { get; set; }
 
         [InverseProperty("StarUsers")]
         [ForeignKey("StarUserId")]

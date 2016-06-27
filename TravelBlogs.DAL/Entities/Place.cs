@@ -22,6 +22,8 @@ namespace TravelBlogs.DAL.Entities
         [ForeignKey("RegionId")]
         public virtual Region Region { get; set; }
 
+
+        // Навигационные свойства
         public virtual ICollection<Post> Posts { get; set; }
 
         public Place()
