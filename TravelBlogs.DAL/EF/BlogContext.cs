@@ -22,7 +22,7 @@ namespace TravelBlogs.DAL.EF
 
         public DbSet<Region> Regions { get; set; }
 
-        public DbSet<ReplyToComment> RepliesToComments { get; set; }
+        public DbSet<ReplyToComment> RepliesToComment { get; set; }
 
         public DbSet<Vote> Votes { get; set; }
 
@@ -45,6 +45,22 @@ namespace TravelBlogs.DAL.EF
             .HasMany(u => u.FollowerUsers)
             .WithRequired(u => u.FollowerUser)
             .WillCascadeOnDelete(false);
+
+
+
+            // Отключаем каскадное удаление у таблиц Comment - ReplayToComment
+            modelBuilder.Entity<Comment>()
+           .HasMany(u => u.MainComments)
+           .WithRequired(u => u.MainComment)
+           .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Comment>()
+            .HasMany(u => u.RepliesToComment)
+            .WithRequired(u => u.ReplayToComment)
+            .WillCascadeOnDelete(false);
+
+
+
             base.OnModelCreating(modelBuilder);
         }
     }

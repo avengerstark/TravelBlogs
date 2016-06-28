@@ -26,11 +26,10 @@ namespace TravelBlogs.DAL.Entities
 
 
         // Навигационные свойства
+
+        public virtual ICollection<ReplyToComment> MainComments { get; set; }
+
         public virtual ICollection<ReplyToComment> RepliesToComment { get; set; }
 
-        public Comment()
-        {
-            RepliesToComment = new List<ReplyToComment>();
-        }
     }
 }
