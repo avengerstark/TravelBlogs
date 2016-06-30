@@ -8,7 +8,7 @@ using TravelBlogs.DAL.Interfaces;
 
 namespace TravelBlogs.DAL.Repositories
 {
-    public class CountryRepository : IRepository<Country>
+    public class CountryRepository : ICountryRepository
     {
         private BlogContext db;
 
@@ -55,7 +55,9 @@ namespace TravelBlogs.DAL.Repositories
         }
 
 
-        // Методы класса
-
+        public IEnumerable<Region> GetRegions(int countryId)
+        {
+            return db.Regions.Where(r => r.CountryId == countryId).ToList();
+        }
     }
 }

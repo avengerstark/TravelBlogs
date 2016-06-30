@@ -7,5 +7,6 @@ namespace TravelBlogs.DAL.Identity
     {
         public ApplicationUserManager(IUserStore<ApplicationUser> store) : base(store) { }
 
+
     }
 }

@@ -51,12 +51,12 @@ namespace TravelBlogs.DAL.EF
             // Отключаем каскадное удаление у таблиц Comment - ReplayToComment
             modelBuilder.Entity<Comment>()
            .HasMany(u => u.MainComments)
-           .WithRequired(u => u.MainComment)
+           .WithRequired(u => u.MainComments)
            .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Comment>()
             .HasMany(u => u.RepliesToComment)
-            .WithRequired(u => u.ReplayToComment)
+            .WithRequired(u => u.RepliesToComment)
             .WillCascadeOnDelete(false);
 
 

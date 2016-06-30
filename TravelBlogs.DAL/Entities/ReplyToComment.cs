@@ -19,12 +19,12 @@ namespace TravelBlogs.DAL.Entities
 
         [InverseProperty("MainComments")]
         [ForeignKey("MainCommentId")]
-        public virtual Comment MainComment { get; set; }
+        public virtual Comment MainComments { get; set; }
 
 
         [InverseProperty("RepliesToComment")]
         [ForeignKey("ReplayToCommentId")]
-        public virtual Comment ReplayToComment { get; set; }
+        public virtual Comment RepliesToComment { get; set; }
 
     }
 }

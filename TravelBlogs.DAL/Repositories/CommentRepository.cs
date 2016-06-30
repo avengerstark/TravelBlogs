@@ -6,15 +6,16 @@ using TravelBlogs.DAL.EF;
 using TravelBlogs.DAL.Entities;
 using TravelBlogs.DAL.Interfaces;
 
+
 namespace TravelBlogs.DAL.Repositories
 {
-    public class CommentRepository : IRepository<Comment> 
+    public class CommentRepository : ICommentRepository
     {
 
         private BlogContext db;
 
 
-        // Реализуем методы интерфейса
+        // Реализуем интерфейс
 
         public CommentRepository(BlogContext context)
         {
@@ -56,6 +57,18 @@ namespace TravelBlogs.DAL.Repositories
         }
 
 
-        // Методы класса
+
+
+     
+        public IEnumerable<Comment> GetRepliesToComment(int id)
+        {
+            return db.RepliesToComment.Where(c => c.MainCommentId == id)
+                .Select(c=>c.RepliesToComment);
+        }
+
+        public IEnumerable<Comment> GetCommentsByUser(string userId)
+        {
+            return db.Comments.Where(c => c.UserId == userId).ToList();
+        }
     }
 }
