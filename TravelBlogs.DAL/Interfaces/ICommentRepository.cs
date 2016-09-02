@@ -10,8 +10,13 @@ namespace TravelBlogs.DAL.Interfaces
 {
     public interface ICommentRepository : IRepository<Comment>
     {
+        void AddReplayToComment(ReplyToComment replayToComment);
+
         IEnumerable<Comment> GetRepliesToComment(int commentId);
 
+                
+
         IEnumerable<Comment> GetCommentsByUser(string userId);
+
     }
 }

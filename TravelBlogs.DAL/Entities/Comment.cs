@@ -10,9 +10,9 @@ namespace TravelBlogs.DAL.Entities
 {
     public class Comment
     {
-        public int CommentId { get; set; }
+        public int Id { get; set; }
         [Required]
-        public string TextComment { get; set; }
+        public string Text { get; set; }
         [Required]
         public DateTime CreateDate { get; set; }
 

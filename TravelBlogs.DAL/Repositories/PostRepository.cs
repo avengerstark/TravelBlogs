@@ -62,12 +62,11 @@ namespace TravelBlogs.DAL.Repositories
             return db.Posts.Where(p => p.UserId == id).ToList();
         }
 
-        public void RatePost(int postId, string userId, bool isLike)
-        {
-            Vote vote = new Vote { UserId=userId, PostId = postId, IsLike=isLike };
 
+
+        public void RatePost(Vote vote)
+        {
             db.Votes.Add(vote);
         }
-            
     }
 }

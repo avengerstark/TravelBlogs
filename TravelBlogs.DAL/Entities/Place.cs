@@ -10,16 +10,16 @@ namespace TravelBlogs.DAL.Entities
 {
     public class Place
     {
-        public int PlaceId { get; set; }
+        public int Id { get; set; }
         [Required]
-        public string PlaceName { get; set; }
+        public string Name { get; set; }
 
         // Временно
         public string Coordinates { get; set; }
 
 
         public int RegionId { get; set; }
-        [ForeignKey("RegionId")]
+        [ForeignKey("Id")]
         public virtual Region Region { get; set; }
 
 

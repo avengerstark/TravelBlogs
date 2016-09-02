@@ -9,9 +9,9 @@ namespace TravelBlogs.DAL.Entities
 {
     public class Country
     {
-        public int PostId { get; set; }
+        public int Id { get; set; }
         [Required]
-        public string CountryName { get; set; }
+        public string Name { get; set; }
 
         public string Description { get; set; }
 

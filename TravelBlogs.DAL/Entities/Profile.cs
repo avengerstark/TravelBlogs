@@ -10,7 +10,7 @@ namespace TravelBlogs.DAL.Entities
 {
     public class Profile
     {
-        public int ProfileId { get; set; }
+        public int Id { get; set; }
 
         public string Address { get; set; }
 

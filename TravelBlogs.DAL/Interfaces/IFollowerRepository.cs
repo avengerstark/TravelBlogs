@@ -7,10 +7,12 @@ using TravelBlogs.DAL.Entities;
 
 namespace TravelBlogs.DAL.Interfaces
 {
-    public interface IPostRepository : IRepository<Post>
+    public interface IFollowerRepository
     {
-        IEnumerable<Post> GetPostsByUser(string userId);
+        void Create(Follower follower);
 
-        void RatePost(Vote vote);
+        void Delete(Follower follower);
+
+        IEnumerable<ApplicationUser> GetFollowersByUser(string userId);
     }
 }

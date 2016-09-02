@@ -18,6 +18,7 @@ namespace TravelBlogs.DAL.Repositories
         private PostRepository _postRepository;
         private ProfileRepository _profileRepository;
         private RegionRepository _regionRepository;
+        private FollowerRepository _followerRepository;
 
 
         private ApplicationUserManager _userManager;
@@ -90,6 +91,16 @@ namespace TravelBlogs.DAL.Repositories
         }
 
 
+
+        public IFollowerRepository Followers
+        {
+            get
+            {
+                if (_followerRepository == null)
+                    _followerRepository = new FollowerRepository(_db);
+                return _followerRepository;
+            }
+        }
 
 
         public ApplicationUserManager UserManager

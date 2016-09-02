@@ -56,9 +56,6 @@ namespace TravelBlogs.DAL.Repositories
             }
         }
 
-
-
-
      
         public IEnumerable<Comment> GetRepliesToComment(int id)
         {
@@ -69,6 +66,12 @@ namespace TravelBlogs.DAL.Repositories
         public IEnumerable<Comment> GetCommentsByUser(string userId)
         {
             return db.Comments.Where(c => c.UserId == userId).ToList();
+        }
+
+
+        public void AddReplayToComment(ReplyToComment replayToComment)
+        {
+            db.RepliesToComment.Add(replayToComment);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace TravelBlogs.DAL.Entities
 {
     public class Post
     {
-        public int PostId { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]
@@ -34,7 +34,7 @@ namespace TravelBlogs.DAL.Entities
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         public int PlaceId { get; set; }
-        [ForeignKey("PlaceId")]
+        [ForeignKey("Id")]
         public virtual Place Place { get; set; }
 
 

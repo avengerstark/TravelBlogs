@@ -16,6 +16,7 @@ namespace TravelBlogs.DAL.Interfaces
         IPostRepository Posts { get; }
         IProfileRepository Profiles { get; }
         IRegionRepository Regions { get; }
+        IFollowerRepository Followers { get; }
 
         ApplicationUserManager UserManager { get; }
         ApplicationRoleManager RoleManager { get; }
