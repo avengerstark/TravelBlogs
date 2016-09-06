@@ -15,7 +15,7 @@ namespace TravelBlogs.DAL.Entities
 
 
         public int PostId { get; set; }
-        [ForeignKey("Id")]
+        [ForeignKey("PostId")]
         public virtual Post Post { get; set; }
 
         public string UserId { get; set; }

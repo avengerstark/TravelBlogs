@@ -24,6 +24,5 @@ namespace TravelBlogs.BLL.DTO
         public string UserId { get; set; }
 
         public int PlaceId { get; set; }
-
     }
 }

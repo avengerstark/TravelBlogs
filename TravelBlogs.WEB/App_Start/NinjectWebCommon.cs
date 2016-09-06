@@ -11,7 +11,7 @@ namespace TravelBlogs.WEB.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Modules;
-    using TravelBlogs.WEB.Infrastructure;
+    using TravelBlogs.BLL.Infrastructure;
 
     public static class NinjectWebCommon 
     {
@@ -42,8 +42,8 @@ namespace TravelBlogs.WEB.App_Start
         private static IKernel CreateKernel()
         {
             // устанавливаем строку подключения
-            var modules = new INinjectModule[] { new TravelModule("DefaultConnection") };
-            var kernel = new StandardKernel();
+            var modules = new INinjectModule[] { new ServiceModule("TravelBlogsDb") };
+            var kernel = new StandardKernel(modules);
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);

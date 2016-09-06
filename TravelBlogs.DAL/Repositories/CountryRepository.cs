@@ -13,13 +13,13 @@ namespace TravelBlogs.DAL.Repositories
         private BlogContext db;
 
 
-        // Реализуем методы интерфейса
-
         public CountryRepository(BlogContext context)
         {
             this.db = context;
         }
 
+
+        // Реализуем методы интерфейса
         public IEnumerable<Country> GetAll()
         {
             return db.Countries;

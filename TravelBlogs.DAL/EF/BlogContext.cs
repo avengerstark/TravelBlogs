@@ -33,6 +33,10 @@ namespace TravelBlogs.DAL.EF
             
             // Составной ключ таблицы Follower
             modelBuilder.Entity<Follower>().HasKey(f => new { f.StarUserId, f.FollowerUserId });
+            // Составной ключ таблицы Vote
+            modelBuilder.Entity<Vote>().HasKey(v => new {v.PostId, v.UserId });
+            // Составной ключ таблицы ReplyToComment
+            modelBuilder.Entity<ReplyToComment>().HasKey(r => new { r.MainCommentId, r.ReplayToCommentId});
 
 
             // Отключаем каскадное удаление у таблиц ApplicationUser - Follower

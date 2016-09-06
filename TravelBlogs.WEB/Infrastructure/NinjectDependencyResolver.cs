@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Ninject;
-using TravelBlogs.DAL.Repositories;
-using TravelBlogs.DAL.Interfaces;
+using TravelBlogs.BLL.Infrastructure;
+using TravelBlogs.BLL.Interfaces;
+using TravelBlogs.BLL.Services;
+using System.Web.Mvc;
 
 namespace TravelBlogs.WEB.Infrastructure
 {
-    public class NinjectDependencyResolver
+    public class NinjectDependencyResolver : IDependencyResolver
     {
         private IKernel kernel;
 
@@ -30,7 +32,7 @@ namespace TravelBlogs.WEB.Infrastructure
 
         private void AddBindings()
         {
-            
+            kernel.Bind<ITravelBlogsService>().To<TravelBlogsService>();
         }
     }
 }
