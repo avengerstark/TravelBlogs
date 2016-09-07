@@ -12,9 +12,12 @@ namespace TravelBlogs.BLL.DTO
 
         public string Name { get; set; }
 
-        // Временно
-        public string Coordinates { get; set; }
+        public CoordinatesInfoDTO CoordinatesInfo { get; set; }
 
+        public PlaceDTO()
+        {
+            CoordinatesInfo = new CoordinatesInfoDTO();
+        }
 
         public int RegionId { get; set; }
     }

@@ -146,6 +146,7 @@
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
+    <Compile Include="Models\CoordinatesInfoViewModel.cs" />
     <Compile Include="Models\CountryViewModel.cs" />
     <Compile Include="Models\FollowerViewModel.cs" />
     <Compile Include="Models\PlaceViewModel.cs" />

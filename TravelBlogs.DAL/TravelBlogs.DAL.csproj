@@ -60,6 +60,7 @@
     <Compile Include="Entities\ApplicationRole.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\CoordinatesInfo.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Follower.cs" />
     <Compile Include="Entities\Place.cs" />

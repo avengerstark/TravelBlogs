@@ -11,8 +11,12 @@ namespace TravelBlogs.WEB.Models
 
         public string Name { get; set; }
 
-        // Временно
-        public string Coordinates { get; set; }
+        public CoordinatesInfoViewModel CoordinatesInfo { get; set; }
+
+        public PlaceViewModel()
+        {
+            CoordinatesInfo = new CoordinatesInfoViewModel();
+        }
 
 
         public int RegionId { get; set; }

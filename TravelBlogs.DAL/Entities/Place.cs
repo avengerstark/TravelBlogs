@@ -14,9 +14,7 @@ namespace TravelBlogs.DAL.Entities
         [Required]
         public string Name { get; set; }
 
-        // Временно
-        public string Coordinates { get; set; }
-
+        public CoordinatesInfo CoordinatesInfo { get; set; }
 
         public int RegionId { get; set; }
         [ForeignKey("Id")]
@@ -29,6 +27,7 @@ namespace TravelBlogs.DAL.Entities
         public Place()
         {
             Posts = new List<Post>();
+            CoordinatesInfo = new CoordinatesInfo();
         }
 
     }
