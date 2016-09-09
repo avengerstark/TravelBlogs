@@ -21,7 +21,7 @@ namespace TravelBlogs.WEB.Controllers
         public ActionResult Add()
         {
             CountryDTO country = new CountryDTO { Name = "France", Description = "croissants" };
-            travelService.Locations.Create(country);
+            travelService.Locations.CreateCountry(country);
             return RedirectToAction("lol");
         }
 

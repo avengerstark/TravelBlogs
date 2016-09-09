@@ -26,7 +26,12 @@ namespace TravelBlogs.BLL.Services
 
         public ICommentService Comments
         {
-            get { throw new NotImplementedException(); }
+            get 
+            {
+                if (_commentService == null)
+                    _commentService = new CommentService(_unitOfWork);
+                return _commentService;
+            }
         }
 
         public ILocationService Locations
@@ -41,17 +46,27 @@ namespace TravelBlogs.BLL.Services
 
         public IPostService Posts
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                if (_postService == null)
+                    _postService = new PostService(_unitOfWork);
+                return _postService;
+            }
         }
 
         public IUserService Users
         {
-            get { throw new NotImplementedException(); }
+            get 
+            {
+                if (_userServica == null)
+                    _userServica = new UserService(_unitOfWork);
+                return _userServica;
+            }
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _unitOfWork.Dispose();
         }
     }
 }

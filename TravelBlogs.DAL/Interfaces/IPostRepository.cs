@@ -11,6 +11,7 @@ namespace TravelBlogs.DAL.Interfaces
     {
         IEnumerable<Post> GetPostsByUser(string userId);
 
-        void RatePost(Vote vote);
+        void Evaluate(Vote vote);
+        void DeleteEvaluate(Vote vote);
     }
 }

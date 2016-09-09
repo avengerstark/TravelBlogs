@@ -64,9 +64,16 @@ namespace TravelBlogs.DAL.Repositories
 
 
 
-        public void RatePost(Vote vote)
+        public void Evaluate(Vote vote)
         {
             db.Votes.Add(vote);
+        }
+
+
+
+        public void DeleteEvaluate(Vote vote)
+        {
+            db.Votes.Remove(vote);
         }
     }
 }

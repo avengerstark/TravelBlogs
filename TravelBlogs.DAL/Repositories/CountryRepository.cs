@@ -53,11 +53,6 @@ namespace TravelBlogs.DAL.Repositories
                 db.Countries.Remove(country);
             }
         }
-
-
-        public IEnumerable<Region> GetRegions(int countryId)
-        {
-            return db.Regions.Where(r => r.CountryId == countryId).ToList();
-        }
+  
     }
 }

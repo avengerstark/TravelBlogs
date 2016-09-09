@@ -1,0 +1,49 @@
+﻿@model TravelBlogs.WEB.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+@using(Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <h4>Регистрация пользователя</h4>
+        <hr />
+        @Html.ValidationSummary(false)
+
+        <div>
+            Электроный адрес
+            <div>
+                @Html.EditorFor(model => model.Email)
+            </div>            
+        </div>
+
+        <div>
+            Пароль
+            <div>
+                @Html.EditorFor(model => model.Password)
+            </div>
+        </div>
+
+        <div>
+            Подтвердте пароль
+            <div>
+                @Html.EditorFor(model => model.ConfirmPassword)
+            </div>
+        </div>
+
+        <div>
+            Имя
+            <div>
+                @Html.EditorFor(model => model.Name)
+            </div>
+        </div>
+        <div>
+            <div>
+                <input type="submit" value="Зарегестрироваться" />
+            </div>
+        </div>
+    </div>
+}
+

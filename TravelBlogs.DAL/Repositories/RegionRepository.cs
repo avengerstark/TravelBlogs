@@ -55,12 +55,9 @@ namespace TravelBlogs.DAL.Repositories
             }
         }
 
-
-
-        public IEnumerable<Place> GetPlaces(int regionId)
+        public IEnumerable<Region> GetRegions(int countryId)
         {
-            return db.Places.Where(p => p.RegionId == regionId).ToList();
+            return db.Regions.Where(r => r.CountryId == countryId).ToList();
         }
-
     }
 }
