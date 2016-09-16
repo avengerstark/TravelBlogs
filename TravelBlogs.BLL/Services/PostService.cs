@@ -22,47 +22,66 @@ namespace TravelBlogs.BLL.Services
 
         public IEnumerable<PostDTO> GetAll()
         {
-            throw new NotImplementedException();
+            Mapper.Initialize(cfg => cfg.CreateMap<Post, PostDTO>());
+            return Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(db.Posts.GetAll());
         }
 
         public IEnumerable<PostDTO> Find(Func<PostDTO, bool> predicate)
         {
-            throw new NotImplementedException();
+            Mapper.Initialize(cfg => cfg.CreateMap<Post, PostDTO>());
+            IEnumerable<PostDTO> posts = Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(db.Posts.GetAll());
+            return posts.Where(predicate);
+
         }
 
         public IEnumerable<PostDTO> GetPostsByUser(string userId)
         {
-            throw new NotImplementedException();
+            Mapper.Initialize(cfg => cfg.CreateMap<Post, PostDTO>());
+            return Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(db.Posts.GetPostsByUser(userId));
         }
 
         public PostDTO Get(int id)
         {
-            throw new NotImplementedException();
+            Mapper.Initialize(cfg => cfg.CreateMap<Post, PostDTO>());
+            return Mapper.Map<Post, PostDTO>(db.Posts.Get(id));
         }
 
-        public void Create(PostDTO post)
+        public void Create(PostDTO postDto)
         {
-            throw new NotImplementedException();
+            Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, Post>());
+            Post post = Mapper.Map<PostDTO, Post>(postDto);
+            db.Posts.Create(post);
+            db.SaveAsync();
         }
 
-        public void Update(PostDTO post)
+        public void Update(PostDTO postDto)
         {
-            throw new NotImplementedException();
+            Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, Post>());
+            Post post = Mapper.Map<PostDTO, Post>(postDto);
+            db.Posts.Update(post);
+            db.SaveAsync();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            db.Posts.Delete(id);
+            db.SaveAsync();
         }
 
-        public void Evaluate(VoteDTO vote)
+        public void Evaluate(VoteDTO voteDto)
         {
-            throw new NotImplementedException();
+            Mapper.Initialize(cfg => cfg.CreateMap<VoteDTO, Vote>());
+            Vote vote = Mapper.Map<VoteDTO, Vote>(voteDto);
+            db.Posts.Evaluate(vote);
+            db.SaveAsync();
         }
 
-        public void DeleteEvaluate(VoteDTO vote)
+        public void DeleteEvaluate(VoteDTO voteDto)
         {
-            throw new NotImplementedException();
+            Mapper.Initialize(cfg => cfg.CreateMap<VoteDTO, Vote>());
+            Vote vote = Mapper.Map<VoteDTO, Vote>(voteDto);
+            db.Posts.DeleteEvaluate(vote);
+            db.SaveAsync();
         }
     }
 }
