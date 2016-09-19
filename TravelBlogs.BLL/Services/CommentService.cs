@@ -20,49 +20,66 @@ namespace TravelBlogs.BLL.Services
             this.db = uow;
         }
 
+
+
+
         public IEnumerable<CommentDTO> GetAll()
         {
-            throw new NotImplementedException();
+            return Mapper.Map<IEnumerable<Comment>, IEnumerable<CommentDTO>>(db.Comments.GetAll());
+        }
+
+        public IEnumerable<CommentDTO> GetCommetsByPost(int postId)
+        {
+            return Mapper.Map<IEnumerable<Comment>, IEnumerable<CommentDTO>>(db.Comments.GetCommetsByPost(postId));
         }
 
         public IEnumerable<CommentDTO> Find(Func<CommentDTO, bool> predicate)
         {
-            throw new NotImplementedException();
+            IEnumerable<CommentDTO> comments = GetAll();
+            return comments.Where(predicate);
         }
 
         public IEnumerable<CommentDTO> GetRepliesToComment(int commentId)
         {
-            throw new NotImplementedException();
+            return Mapper.Map<IEnumerable<Comment>, IEnumerable<CommentDTO>>(db.Comments.GetRepliesToComment(commentId));
         }
 
         public IEnumerable<CommentDTO> GetCommentsByUser(string userId)
         {
-            throw new NotImplementedException();
+            return Mapper.Map<IEnumerable<Comment>, IEnumerable<CommentDTO>>(db.Comments.GetCommentsByUser(userId));
         }
 
         public CommentDTO Get(int id)
         {
-            throw new NotImplementedException();
+            return Mapper.Map<Comment, CommentDTO>(db.Comments.Get(id);
         }
 
-        public void Create(CommentDTO comment)
+        public void Create(CommentDTO commentDto)
         {
-            throw new NotImplementedException();
+            Comment comment = Mapper.Map<CommentDTO, Comment>(commentDto);
+            db.Comments.Create(comment);
+            db.SaveAsync();
         }
 
-        public void Update(CommentDTO comment)
+        public void Update(CommentDTO commentDto)
         {
-            throw new NotImplementedException();
+            Comment comment = Mapper.Map<CommentDTO, Comment>(commentDto);
+            db.Comments.Update(comment);
+            db.SaveAsync();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            db.Comments.Delete(id);
+            db.SaveAsync();
         }
 
-        public void AddReplayToComment(ReplayToCommentDTO replayToComment)
+        public void AddReplayToComment(ReplayToCommentDTO replayToCommentDto)
         {
-            throw new NotImplementedException();
+            ReplayToComment replayToComment = Mapper.Map<ReplayToCommentDTO, ReplayToComment>(replayToCommentDto);
+            db.Comments.AddReplayToComment(replayToComment);
+            db.SaveAsync();
         }
+
     }
 }

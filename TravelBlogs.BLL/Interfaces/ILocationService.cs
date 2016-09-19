@@ -21,7 +21,7 @@ namespace TravelBlogs.BLL.Interfaces
         IEnumerable<RegionDTO> FindRegions(Func<RegionDTO, Boolean> predicate);
         IEnumerable<RegionDTO> GetRegionsByCountry(int id);
         RegionDTO GetRegion(int id);
-        void CreateRiogion(RegionDTO region);
+        void CreateRegion(RegionDTO region);
         void UpdateRegion(RegionDTO region);
         void DeleteRegion(int id);
 

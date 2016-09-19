@@ -6,6 +6,10 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
 using TravelBlogs.BLL.Services;
 using TravelBlogs.BLL.Interfaces;
+using TravelBlogs.BLL.Infrastructure;
+using System.Web.Mvc;
+using System.Web.Routing;
+using System.Web.Optimization;
 
 [assembly: OwinStartup(typeof(TravelBlogs.WEB.App_Start.Startup))]
 namespace TravelBlogs.WEB.App_Start
@@ -18,7 +22,14 @@ namespace TravelBlogs.WEB.App_Start
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
-            }); 
+            });
+
+            //Конфигурация перенесена из Global.asax
+            AreaRegistration.RegisterAllAreas();
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapperConfig.RegisterMapper();
         }
     }
 }

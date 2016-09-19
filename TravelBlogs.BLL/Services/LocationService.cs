@@ -27,111 +27,128 @@ namespace TravelBlogs.BLL.Services
 
         public IEnumerable<CountryDTO> GetAllCountries()
         {
-            throw new NotImplementedException();
+            return Mapper.Map<IEnumerable<Country>, IEnumerable<CountryDTO>>(db.Countries.GetAll());
         }
 
         public IEnumerable<CountryDTO> FindCountries(Func<CountryDTO, bool> predicate)
         {
-            throw new NotImplementedException();
+            IEnumerable<CountryDTO> countries = GetAllCountries();
+            return countries.Where(predicate);
         }
 
         public CountryDTO GetCountry(int id)
         {
-            throw new NotImplementedException();
+            return Mapper.Map<Country, CountryDTO>(db.Countries.Get(id));
         }
 
         public void CreateCountry(CountryDTO countryDto)
         {
-            Country country = new Country
-            {
-                Name = countryDto.Name,
-                Description = countryDto.Description
-            };
+            Country country = Mapper.Map<CountryDTO, Country>(countryDto);
             db.Countries.Create(country);
+            db.SaveAsync();
+        }
+
+        public void UpdateCountry(CountryDTO countryDto)
+        {
+            Country country = Mapper.Map<CountryDTO, Country>(countryDto);
+            db.Countries.Update(country);
+            db.SaveAsync();
+        }
+
+        public void DeleteCountry(int id)
+        {
+            db.Countries.Delete(id);
             db.SaveAsync();
         }
 
 
 
 
-        public void UpdateCountry(CountryDTO country)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteCountry(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public IEnumerable<RegionDTO> GetAllRegions()
         {
-            throw new NotImplementedException();
+            return Mapper.Map<IEnumerable<Region>, IEnumerable<RegionDTO>>(db.Regions.GetAll());
         }
 
         public IEnumerable<RegionDTO> FindRegions(Func<RegionDTO, bool> predicate)
         {
-            throw new NotImplementedException();
+            IEnumerable<RegionDTO> regions = GetAllRegions();
+            return regions.Where(predicate);
         }
 
         public IEnumerable<RegionDTO> GetRegionsByCountry(int id)
         {
-            throw new NotImplementedException();
+            return Mapper.Map<IEnumerable<Region>, IEnumerable<RegionDTO>>(db.Regions.GetRegions(id));
         }
 
         public RegionDTO GetRegion(int id)
         {
-            throw new NotImplementedException();
+            return Mapper.Map<Region, RegionDTO>(db.Regions.Get(id));
         }
 
-        public void CreateRiogion(RegionDTO region)
+        public void CreateRegion(RegionDTO regionDto)
         {
-            throw new NotImplementedException();
+            Region region = Mapper.Map<RegionDTO, Region>(regionDto);
+            db.Regions.Create(region);
+            db.SaveAsync();
         }
 
-        public void UpdateRegion(RegionDTO region)
+        public void UpdateRegion(RegionDTO regionDto)
         {
-            throw new NotImplementedException();
+            Region region = Mapper.Map<RegionDTO, Region>(regionDto);
+            db.Regions.Update(region);
+            db.SaveAsync();
         }
 
         public void DeleteRegion(int id)
         {
-            throw new NotImplementedException();
+            db.Regions.Delete(id);
+            db.SaveAsync();
         }
+
+
+
+
 
         public IEnumerable<PlaceDTO> GetAllPlaces()
         {
-            throw new NotImplementedException();
+            return Mapper.Map<IEnumerable<Place>, IEnumerable<PlaceDTO>>(db.Places.GetAll());
         }
 
         public IEnumerable<PlaceDTO> FindPlaces(Func<PlaceDTO, bool> predicate)
         {
-            throw new NotImplementedException();
+            IEnumerable<PlaceDTO> places = GetAllPlaces();
+            return places.Where(predicate);
         }
 
         public IEnumerable<PlaceDTO> GetPlacesByRegion(int id)
         {
-            throw new NotImplementedException();
+            return Mapper.Map<IEnumerable<Place>, IEnumerable<PlaceDTO>>(db.Places.GetPlaces(id));
         }
 
         public PlaceDTO GetPlace(int id)
         {
-            throw new NotImplementedException();
+            return Mapper.Map<Place, PlaceDTO>(db.Places.Get(id));
         }
 
-        public void CreatePlace(PlaceDTO region)
+        public void CreatePlace(PlaceDTO placeDto)
         {
-            throw new NotImplementedException();
+            Place place = Mapper.Map<PlaceDTO, Place>(placeDto);
+            db.Places.Create(place);
+            db.SaveAsync();
         }
 
-        public void UpdatePlace(PlaceDTO region)
+        public void UpdatePlace(PlaceDTO placeDto)
         {
-            throw new NotImplementedException();
+            Place place = Mapper.Map<PlaceDTO, Place>(placeDto);
+            db.Places.Update(place);
+            db.SaveAsync();
         }
 
         public void DeletePlace(int id)
         {
-            throw new NotImplementedException();
+            db.Places.Delete(id);
+            db.SaveAsync();
         }
     }
 }

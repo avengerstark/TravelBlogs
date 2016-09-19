@@ -20,35 +20,33 @@ namespace TravelBlogs.BLL.Services
             this.db = uow;
         }
 
+
+
+
         public IEnumerable<PostDTO> GetAll()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Post, PostDTO>());
             return Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(db.Posts.GetAll());
         }
 
         public IEnumerable<PostDTO> Find(Func<PostDTO, bool> predicate)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Post, PostDTO>());
-            IEnumerable<PostDTO> posts = Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(db.Posts.GetAll());
+            IEnumerable<PostDTO> posts = GetAll();
             return posts.Where(predicate);
 
         }
 
         public IEnumerable<PostDTO> GetPostsByUser(string userId)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Post, PostDTO>());
             return Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(db.Posts.GetPostsByUser(userId));
         }
 
         public PostDTO Get(int id)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Post, PostDTO>());
             return Mapper.Map<Post, PostDTO>(db.Posts.Get(id));
         }
 
         public void Create(PostDTO postDto)
-        {
-            Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, Post>());
+        {;
             Post post = Mapper.Map<PostDTO, Post>(postDto);
             db.Posts.Create(post);
             db.SaveAsync();
@@ -56,7 +54,6 @@ namespace TravelBlogs.BLL.Services
 
         public void Update(PostDTO postDto)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<PostDTO, Post>());
             Post post = Mapper.Map<PostDTO, Post>(postDto);
             db.Posts.Update(post);
             db.SaveAsync();
@@ -70,7 +67,6 @@ namespace TravelBlogs.BLL.Services
 
         public void Evaluate(VoteDTO voteDto)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<VoteDTO, Vote>());
             Vote vote = Mapper.Map<VoteDTO, Vote>(voteDto);
             db.Posts.Evaluate(vote);
             db.SaveAsync();
@@ -78,7 +74,6 @@ namespace TravelBlogs.BLL.Services
 
         public void DeleteEvaluate(VoteDTO voteDto)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<VoteDTO, Vote>());
             Vote vote = Mapper.Map<VoteDTO, Vote>(voteDto);
             db.Posts.DeleteEvaluate(vote);
             db.SaveAsync();

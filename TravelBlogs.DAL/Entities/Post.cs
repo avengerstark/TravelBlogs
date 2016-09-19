@@ -42,9 +42,12 @@ namespace TravelBlogs.DAL.Entities
 
         public virtual ICollection<Vote> Votes { get; set; }
 
+        public virtual ICollection<Comment> Comments { get; set; }
+
         public Post()
         {
             Votes = new List<Vote>();
+            Comments = new List<Comment>();
         }
 
     }

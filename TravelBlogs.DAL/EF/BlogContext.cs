@@ -22,7 +22,7 @@ namespace TravelBlogs.DAL.EF
 
         public DbSet<Region> Regions { get; set; }
 
-        public DbSet<ReplyToComment> RepliesToComment { get; set; }
+        public DbSet<ReplayToComment> RepliesToComment { get; set; }
 
         public DbSet<Vote> Votes { get; set; }
 
@@ -35,8 +35,8 @@ namespace TravelBlogs.DAL.EF
             modelBuilder.Entity<Follower>().HasKey(f => new { f.StarUserId, f.FollowerUserId });
             // Составной ключ таблицы Vote
             modelBuilder.Entity<Vote>().HasKey(v => new {v.PostId, v.UserId });
-            // Составной ключ таблицы ReplyToComment
-            modelBuilder.Entity<ReplyToComment>().HasKey(r => new { r.MainCommentId, r.ReplayToCommentId});
+            // Составной ключ таблицы ReplayToComment
+            modelBuilder.Entity<ReplayToComment>().HasKey(r => new { r.MainCommentId, r.ReplayToCommentId});
 
 
             // Отключаем каскадное удаление у таблиц ApplicationUser - Follower

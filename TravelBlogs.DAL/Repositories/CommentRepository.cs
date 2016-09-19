@@ -69,9 +69,15 @@ namespace TravelBlogs.DAL.Repositories
         }
 
 
-        public void AddReplayToComment(ReplyToComment replayToComment)
+        public void AddReplayToComment(ReplayToComment replayToComment)
         {
             db.RepliesToComment.Add(replayToComment);
+        }
+
+
+        public IEnumerable<Comment> GetCommetsByPost(int postId)
+        {
+            return db.Comments.Where(c => c.PostId == postId).ToList();
         }
     }
 }

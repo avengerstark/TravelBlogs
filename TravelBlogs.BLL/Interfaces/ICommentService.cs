@@ -10,6 +10,7 @@ namespace TravelBlogs.BLL.Interfaces
     public interface ICommentService
     {
         IEnumerable<CommentDTO> GetAll();
+        IEnumerable<CommentDTO> GetCommetsByPost(int postId);  
         IEnumerable<CommentDTO> Find(Func<CommentDTO, Boolean> predicate);
         IEnumerable<CommentDTO> GetRepliesToComment(int commentId);
         IEnumerable<CommentDTO> GetCommentsByUser(string userId);

@@ -23,13 +23,15 @@ namespace TravelBlogs.DAL.Entities
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
-
+        public int PostId { get; set; }
+        [ForeignKey("PostId")]
+        public virtual Post Post { get; set; }
 
         // Навигационные свойства
 
-        public virtual ICollection<ReplyToComment> MainComments { get; set; }
+        public virtual ICollection<ReplayToComment> MainComments { get; set; }
 
-        public virtual ICollection<ReplyToComment> RepliesToComment { get; set; }
+        public virtual ICollection<ReplayToComment> RepliesToComment { get; set; }
 
     }
 }

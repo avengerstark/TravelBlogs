@@ -20,9 +20,9 @@ namespace TravelBlogs.WEB.Controllers
 
         public ActionResult Add()
         {
-            CountryDTO country = new CountryDTO { Name = "France", Description = "croissants" };
+            CountryDTO country = new CountryDTO { Name = "France", Description = "Taxi 2" };
             travelService.Locations.CreateCountry(country);
-            return RedirectToAction("lol");
+            return RedirectToAction("Lol");
         }
 
     }
