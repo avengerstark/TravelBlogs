@@ -12,13 +12,14 @@ namespace TravelBlogs.BLL.DTO
 
         public string Name { get; set; }
 
-        public CoordinatesInfoDTO CoordinatesInfo { get; set; }
+        public double GeoLong { get; set; } // долгота - для карт google
 
-        public PlaceDTO()
-        {
-            CoordinatesInfo = new CoordinatesInfoDTO();
-        }
+        public double GeoLat { get; set; } // широта - для карт google
 
         public int RegionId { get; set; }
+
+        public RegionDTO Region { get; set; }
+
+        public List<PostDTO> Posts { get; set; }
     }
 }

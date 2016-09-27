@@ -19,9 +19,5 @@ namespace TravelBlogs.DAL.Entities
         // Навигационные свойства
         public virtual ICollection<Region> Regions { get; set; }
 
-        public Country()
-        {
-            Regions = new List<Region>();
-        }
     }
 }

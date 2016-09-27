@@ -11,14 +11,14 @@ namespace TravelBlogs.BLL.Interfaces
     {
 
         IEnumerable<CountryDTO> GetAllCountries();
-        IEnumerable<CountryDTO> FindCountries(Func<CountryDTO, Boolean> predicate);
+        IEnumerable<CountryDTO> Find(Func<CountryDTO, Boolean> predicate);
         CountryDTO GetCountry (int id);
         void CreateCountry(CountryDTO country);
         void UpdateCountry(CountryDTO country);
         void DeleteCountry(int id);
 
         IEnumerable<RegionDTO> GetAllRegions();
-        IEnumerable<RegionDTO> FindRegions(Func<RegionDTO, Boolean> predicate);
+        IEnumerable<RegionDTO> Find(Func<RegionDTO, Boolean> predicate);
         IEnumerable<RegionDTO> GetRegionsByCountry(int id);
         RegionDTO GetRegion(int id);
         void CreateRegion(RegionDTO region);
@@ -26,7 +26,7 @@ namespace TravelBlogs.BLL.Interfaces
         void DeleteRegion(int id);
 
         IEnumerable<PlaceDTO> GetAllPlaces();
-        IEnumerable<PlaceDTO> FindPlaces(Func<PlaceDTO, Boolean> predicate);
+        IEnumerable<PlaceDTO> Find(Func<PlaceDTO, Boolean> predicate);
         IEnumerable<PlaceDTO> GetPlacesByRegion(int id);
         PlaceDTO GetPlace(int id);
         void CreatePlace(PlaceDTO region);

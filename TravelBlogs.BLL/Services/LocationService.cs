@@ -30,10 +30,10 @@ namespace TravelBlogs.BLL.Services
             return Mapper.Map<IEnumerable<Country>, IEnumerable<CountryDTO>>(db.Countries.GetAll());
         }
 
-        public IEnumerable<CountryDTO> FindCountries(Func<CountryDTO, bool> predicate)
+        public IEnumerable<CountryDTO> Find(Func<CountryDTO, bool> predicateDto)
         {
-            IEnumerable<CountryDTO> countries = GetAllCountries();
-            return countries.Where(predicate);
+            Func<Country, bool> predicate = Mapper.Map<Func<CountryDTO, bool>, Func<Country, bool>>(predicateDto);
+            return Mapper.Map<IEnumerable<Country>, IEnumerable<CountryDTO>>(db.Countries.Find(predicate));
         }
 
         public CountryDTO GetCountry(int id)
@@ -45,20 +45,17 @@ namespace TravelBlogs.BLL.Services
         {
             Country country = Mapper.Map<CountryDTO, Country>(countryDto);
             db.Countries.Create(country);
-            db.SaveAsync();
         }
 
         public void UpdateCountry(CountryDTO countryDto)
         {
             Country country = Mapper.Map<CountryDTO, Country>(countryDto);
             db.Countries.Update(country);
-            db.SaveAsync();
         }
 
         public void DeleteCountry(int id)
         {
             db.Countries.Delete(id);
-            db.SaveAsync();
         }
 
 
@@ -70,10 +67,10 @@ namespace TravelBlogs.BLL.Services
             return Mapper.Map<IEnumerable<Region>, IEnumerable<RegionDTO>>(db.Regions.GetAll());
         }
 
-        public IEnumerable<RegionDTO> FindRegions(Func<RegionDTO, bool> predicate)
+        public IEnumerable<RegionDTO> Find(Func<RegionDTO, bool> predicateDto)
         {
-            IEnumerable<RegionDTO> regions = GetAllRegions();
-            return regions.Where(predicate);
+            Func<Region, bool> predicate = Mapper.Map<Func<RegionDTO, bool>, Func<Region, bool>>(predicateDto);
+            return Mapper.Map<IEnumerable<Region>, IEnumerable<RegionDTO>>(db.Regions.Find(predicate));
         }
 
         public IEnumerable<RegionDTO> GetRegionsByCountry(int id)
@@ -90,20 +87,17 @@ namespace TravelBlogs.BLL.Services
         {
             Region region = Mapper.Map<RegionDTO, Region>(regionDto);
             db.Regions.Create(region);
-            db.SaveAsync();
         }
 
         public void UpdateRegion(RegionDTO regionDto)
         {
             Region region = Mapper.Map<RegionDTO, Region>(regionDto);
             db.Regions.Update(region);
-            db.SaveAsync();
         }
 
         public void DeleteRegion(int id)
         {
             db.Regions.Delete(id);
-            db.SaveAsync();
         }
 
 
@@ -115,10 +109,10 @@ namespace TravelBlogs.BLL.Services
             return Mapper.Map<IEnumerable<Place>, IEnumerable<PlaceDTO>>(db.Places.GetAll());
         }
 
-        public IEnumerable<PlaceDTO> FindPlaces(Func<PlaceDTO, bool> predicate)
+        public IEnumerable<PlaceDTO> Find(Func<PlaceDTO, bool> predicateDto)
         {
-            IEnumerable<PlaceDTO> places = GetAllPlaces();
-            return places.Where(predicate);
+            Func<Place, bool> predicate = Mapper.Map<Func<PlaceDTO, bool>, Func<Place, bool>>(predicateDto);
+            return Mapper.Map<IEnumerable<Place>, IEnumerable<PlaceDTO>>(db.Places.Find(predicate));
         }
 
         public IEnumerable<PlaceDTO> GetPlacesByRegion(int id)
@@ -133,22 +127,29 @@ namespace TravelBlogs.BLL.Services
 
         public void CreatePlace(PlaceDTO placeDto)
         {
+            //Mapper.Initialize(cfg => cfg.CreateMap<CoordinatesInfoDTO, CoordinatesInfo>());
+            ////Mapper.Initialize(cfg => cfg.CreateMap<PlaceDTO, Place>());
+
+            //Mapper.Initialize(cfg => cfg.CreateMap<PlaceDTO, Place>().ForMember(p => p.CoordinatesInfo
+            //    , c => c.MapFrom(q => Mapper.Map<CoordinatesInfoDTO, CoordinatesInfo>(q.CoordinatesInfo))));
+
+            //Mapper.Initialize(cfg => cfg.CreateMap<PlaceDTO, Place>()
+            //    .ForMember(p => p.CoordinatesInfo, c => c.MapFrom(i => i.CoordinatesInfo)));
+
+         
             Place place = Mapper.Map<PlaceDTO, Place>(placeDto);
             db.Places.Create(place);
-            db.SaveAsync();
         }
 
         public void UpdatePlace(PlaceDTO placeDto)
         {
             Place place = Mapper.Map<PlaceDTO, Place>(placeDto);
             db.Places.Update(place);
-            db.SaveAsync();
         }
 
         public void DeletePlace(int id)
         {
             db.Places.Delete(id);
-            db.SaveAsync();
         }
     }
 }

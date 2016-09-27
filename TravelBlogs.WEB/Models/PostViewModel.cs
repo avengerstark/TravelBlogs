@@ -19,6 +19,10 @@ namespace TravelBlogs.WEB.Models
 
         public DateTime ModificationDate { get; set; }
 
+        public int Rating { get; set; }
+
+        public int CountComments { get; set; }
+
 
         public string UserId { get; set; }
 

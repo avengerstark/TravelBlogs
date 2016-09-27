@@ -29,7 +29,8 @@ namespace TravelBlogs.WEB.App_Start
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AutoMapperConfig.RegisterMapper();
+            AutoMapperBLLConfig.Configure();
+            
         }
     }
 }

@@ -68,5 +68,11 @@ namespace TravelBlogs.BLL.Services
         {
             _unitOfWork.Dispose();
         }
+
+
+        public void Save()
+        {
+            _unitOfWork.SaveAsync();
+        }
     }
 }

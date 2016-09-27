@@ -14,5 +14,6 @@ namespace TravelBlogs.BLL.Interfaces
         IUserService Users { get; }
 
         void Dispose();
+        void Save();
     }
 }

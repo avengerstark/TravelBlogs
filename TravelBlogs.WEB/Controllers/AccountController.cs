@@ -109,6 +109,12 @@ namespace TravelBlogs.WEB.Controllers
                 Role = "admin",
             }, new List<string> { "user", "admin" });
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            travelService.Dispose();
+            base.Dispose(disposing);
+        }
     
     }
 }

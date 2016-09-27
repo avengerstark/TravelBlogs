@@ -33,10 +33,10 @@ namespace TravelBlogs.BLL.Services
             return Mapper.Map<IEnumerable<Comment>, IEnumerable<CommentDTO>>(db.Comments.GetCommetsByPost(postId));
         }
 
-        public IEnumerable<CommentDTO> Find(Func<CommentDTO, bool> predicate)
+        public IEnumerable<CommentDTO> Find(Func<CommentDTO, bool> predicateDto)
         {
-            IEnumerable<CommentDTO> comments = GetAll();
-            return comments.Where(predicate);
+            Func<Comment, bool> predicate = Mapper.Map<Func<CommentDTO, bool>, Func<Comment, bool>>(predicateDto);
+            return Mapper.Map<IEnumerable<Comment>, IEnumerable<CommentDTO>>(db.Comments.Find(predicate));
         }
 
         public IEnumerable<CommentDTO> GetRepliesToComment(int commentId)
@@ -51,35 +51,30 @@ namespace TravelBlogs.BLL.Services
 
         public CommentDTO Get(int id)
         {
-            return Mapper.Map<Comment, CommentDTO>(db.Comments.Get(id);
+            return Mapper.Map<Comment, CommentDTO>(db.Comments.Get(id));
         }
 
         public void Create(CommentDTO commentDto)
         {
             Comment comment = Mapper.Map<CommentDTO, Comment>(commentDto);
             db.Comments.Create(comment);
-            db.SaveAsync();
         }
 
         public void Update(CommentDTO commentDto)
         {
             Comment comment = Mapper.Map<CommentDTO, Comment>(commentDto);
             db.Comments.Update(comment);
-            db.SaveAsync();
         }
 
         public void Delete(int id)
         {
             db.Comments.Delete(id);
-            db.SaveAsync();
         }
 
         public void AddReplayToComment(ReplayToCommentDTO replayToCommentDto)
         {
             ReplayToComment replayToComment = Mapper.Map<ReplayToCommentDTO, ReplayToComment>(replayToCommentDto);
-            db.Comments.AddReplayToComment(replayToComment);
-            db.SaveAsync();
-        }
+            db.Comments.AddReplayToComment(replayToComment);        }
 
     }
 }

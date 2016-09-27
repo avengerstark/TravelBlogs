@@ -216,7 +216,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -231,6 +233,7 @@
     <Content Include="Views\Home\Add.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\SuccessRegister.cshtml" />
+    <Content Include="Views\Home\CreatePost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -246,6 +249,10 @@
     <ProjectReference Include="..\TravelBlogs.BLL\TravelBlogs.BLL.csproj">
       <Project>{d469bcef-43d7-4e62-aa7f-fc0aeb63292d}</Project>
       <Name>TravelBlogs.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TravelBlogs.DAL\TravelBlogs.DAL.csproj">
+      <Project>{c26727f6-f96e-485e-9a25-a851e62f1c54}</Project>
+      <Name>TravelBlogs.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

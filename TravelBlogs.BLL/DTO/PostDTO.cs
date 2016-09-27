@@ -20,9 +20,21 @@ namespace TravelBlogs.BLL.DTO
 
         public DateTime ModificationDate { get; set; }
 
+        public int Rating { get; set; }
+
+        public int CountComments { get; set; }
+
 
         public string UserId { get; set; }
 
         public int PlaceId { get; set; }
+
+        public UserDTO User { get; set; }
+
+        public PlaceDTO Place { get; set; }
+
+        public List<VoteDTO> Votes { get; set; }
+
+        public List<CommentDTO> Commets { get; set; }
     }
 }

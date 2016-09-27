@@ -1,0 +1,32 @@
+﻿@model TravelBlogs.WEB.Models.PostViewModel
+@{
+    ViewBag.Title = "CreatePost";
+}
+
+<h2>CreatePost</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        
+        <div>
+            Заголовок
+            <div>
+                @Html.EditorFor(model => model.Title)
+            </div> 
+        </div>
+
+        <div>
+            Текст
+            <div>
+                @Html.EditorFor(model => model.Body)
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <input type="submit" value="Опубликовать" />
+            </div>
+        </div>
+    </div>
+}

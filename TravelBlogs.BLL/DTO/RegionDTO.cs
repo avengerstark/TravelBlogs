@@ -15,5 +15,9 @@ namespace TravelBlogs.BLL.DTO
         public string Description { get; set; }
 
         public int CountryId { get; set; }
+
+        public CountryDTO Country { get; set; }
+
+        public List<PlaceDTO> Places { get; set; }
     }
 }

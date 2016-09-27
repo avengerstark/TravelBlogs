@@ -28,11 +28,10 @@ namespace TravelBlogs.BLL.Services
             return Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(db.Posts.GetAll());
         }
 
-        public IEnumerable<PostDTO> Find(Func<PostDTO, bool> predicate)
+        public IEnumerable<PostDTO> Find(Func<PostDTO, Boolean> predicateDto)
         {
-            IEnumerable<PostDTO> posts = GetAll();
-            return posts.Where(predicate);
-
+            Func<Post, Boolean> predicate = Mapper.Map<Func<PostDTO, Boolean>, Func<Post, Boolean>>(predicateDto);
+            return Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(db.Posts.Find(predicate));           
         }
 
         public IEnumerable<PostDTO> GetPostsByUser(string userId)
@@ -46,37 +45,32 @@ namespace TravelBlogs.BLL.Services
         }
 
         public void Create(PostDTO postDto)
-        {;
+        {
             Post post = Mapper.Map<PostDTO, Post>(postDto);
             db.Posts.Create(post);
-            db.SaveAsync();
         }
 
         public void Update(PostDTO postDto)
         {
             Post post = Mapper.Map<PostDTO, Post>(postDto);
             db.Posts.Update(post);
-            db.SaveAsync();
         }
 
         public void Delete(int id)
         {
             db.Posts.Delete(id);
-            db.SaveAsync();
         }
 
         public void Evaluate(VoteDTO voteDto)
         {
             Vote vote = Mapper.Map<VoteDTO, Vote>(voteDto);
             db.Posts.Evaluate(vote);
-            db.SaveAsync();
         }
 
         public void DeleteEvaluate(VoteDTO voteDto)
         {
             Vote vote = Mapper.Map<VoteDTO, Vote>(voteDto);
             db.Posts.DeleteEvaluate(vote);
-            db.SaveAsync();
         }
     }
 }

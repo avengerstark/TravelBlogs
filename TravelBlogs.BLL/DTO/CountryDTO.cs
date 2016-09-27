@@ -13,5 +13,8 @@ namespace TravelBlogs.BLL.DTO
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        // Навигационные свойства
+        public List<RegionDTO> Regions { get; set; }
     }
 }

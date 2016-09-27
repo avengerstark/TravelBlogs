@@ -14,21 +14,16 @@ namespace TravelBlogs.DAL.Entities
         [Required]
         public string Name { get; set; }
 
-        public CoordinatesInfo CoordinatesInfo { get; set; }
+        public double GeoLong { get; set; } // долгота - для карт google
+
+        public double GeoLat { get; set; } // широта - для карт google
 
         public int RegionId { get; set; }
-        [ForeignKey("Id")]
+        [ForeignKey("RegionId")]
         public virtual Region Region { get; set; }
 
 
         // Навигационные свойства
         public virtual ICollection<Post> Posts { get; set; }
-
-        public Place()
-        {
-            Posts = new List<Post>();
-            CoordinatesInfo = new CoordinatesInfo();
-        }
-
     }
 }
