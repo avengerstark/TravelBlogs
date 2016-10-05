@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq.Expressions;
 using TravelBlogs.DAL.EF;
 using TravelBlogs.DAL.Entities;
 using TravelBlogs.DAL.Interfaces;
@@ -31,9 +32,9 @@ namespace TravelBlogs.DAL.Repositories
             return db.Regions.Find(id);
         }
 
-        public IEnumerable<Region> Find(Func<Region, bool> predicate)
+        public IQueryable<Region> Find(Expression<Func<Region, bool>> predicate)
         {
-            return db.Regions.Where(predicate).ToList();
+            return db.Regions.Where(predicate);
         }
 
         public void Create(Region item)
@@ -55,9 +56,9 @@ namespace TravelBlogs.DAL.Repositories
             }
         }
 
-        public IEnumerable<Region> GetRegions(int countryId)
+        public IQueryable<Region> GetRegions(int countryId)
         {
-            return db.Regions.Where(r => r.CountryId == countryId).ToList();
+            return db.Regions.Where(r => r.CountryId == countryId);
         }
     }
 }

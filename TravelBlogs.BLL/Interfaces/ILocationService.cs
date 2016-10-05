@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 using TravelBlogs.BLL.DTO;
 
 namespace TravelBlogs.BLL.Interfaces
@@ -11,7 +12,7 @@ namespace TravelBlogs.BLL.Interfaces
     {
 
         IEnumerable<CountryDTO> GetAllCountries();
-        IEnumerable<CountryDTO> Find(Func<CountryDTO, Boolean> predicate);
+        IEnumerable<CountryDTO> Find(Expression<Func<CountryDTO, Boolean>> predicate);
         CountryDTO GetCountry (int id);
         void CreateCountry(CountryDTO country);
         void UpdateCountry(CountryDTO country);

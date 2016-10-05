@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq.Expressions;
 using TravelBlogs.WEB.Models;
 using TravelBlogs.BLL.Interfaces;
 using TravelBlogs.BLL.DTO;
@@ -15,26 +16,18 @@ namespace TravelBlogs.WEB.Controllers
 {
     public class HomeController : Controller
     {
-        ITravelBlogsService travelService;
+        readonly ITravelBlogsService travelService;
         public HomeController(ITravelBlogsService tbs)
         {
             travelService = tbs;
         }
 
+        // Временно
+
         public ActionResult Add()
         {
-            //PostDTO post = new PostDTO { Title = ";sd", Body = "adlvfl6464", CreateDate = DateTime.Now,
-            //                             ModificationDate = DateTime.Now,
-            //                             IsApproved = false,
-            //                             PlaceId = 1,
-            //                             UserId = "f6e7ea56-df77-463c-b5bb-16e103e8db4d",
-            //                             Rating=1,
-            //                             CountComments=514,
-            //};
-            //travelService.Posts.Create(post);
 
-
-            CountryDTO country = new CountryDTO { Name = "Holland", Description = "lol" };
+            CountryDTO country = new CountryDTO { Name = "France", Description = "lol" };
             travelService.Locations.CreateCountry(country);
 
             RegionDTO region = new RegionDTO { Name = "avgawdfa", Description = "sdevgfawaw", CountryId = country.Id };
@@ -45,9 +38,8 @@ namespace TravelBlogs.WEB.Controllers
 
             travelService.Save();
 
-            return RedirectToAction("Lol");
+            return RedirectToAction("Index");
         }
-
 
         public ActionResult CreatePost()
         {
@@ -66,8 +58,39 @@ namespace TravelBlogs.WEB.Controllers
                 PostDTO post = Mapper.Map<PostViewModel, PostDTO>(postView);
                 travelService.Posts.Create(post);
             }
-            return RedirectToAction("Lol");
+            return RedirectToAction("Index");
         }
+
+
+
+
+
+
+        // For testing
+
+
+        public ActionResult GetCountries()
+        {
+            List<CountryDTO> model = travelService.Locations.GetAllCountries() as List<CountryDTO>;
+            return View(model);
+        }
+
+
+        public ActionResult FindCountries(Expression<Func<CountryDTO, bool>> pred)
+        {
+            List<CountryDTO> countries = (List<CountryDTO>)travelService.Locations.Find(pred);
+            return View(countries);
+        }
+        
+        public ActionResult SaveCountry(CountryDTO country)
+        {
+            travelService.Locations.CreateCountry(country);
+            travelService.Save();
+            return View(country);
+
+        }
+
+
 
 
 

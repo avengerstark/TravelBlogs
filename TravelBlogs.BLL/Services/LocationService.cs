@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using System.Linq.Expressions;
 using TravelBlogs.BLL.Interfaces;
 using TravelBlogs.DAL.Interfaces;
 using TravelBlogs.BLL.DTO;
@@ -21,19 +22,15 @@ namespace TravelBlogs.BLL.Services
             this.db = uow;
         }
 
-
-
-
-
         public IEnumerable<CountryDTO> GetAllCountries()
         {
             return Mapper.Map<IEnumerable<Country>, IEnumerable<CountryDTO>>(db.Countries.GetAll());
         }
 
-        public IEnumerable<CountryDTO> Find(Func<CountryDTO, bool> predicateDto)
+        public IEnumerable<CountryDTO> Find(Expression<Func<CountryDTO, Boolean>> predicateDto)
         {
-            Func<Country, bool> predicate = Mapper.Map<Func<CountryDTO, bool>, Func<Country, bool>>(predicateDto);
-            return Mapper.Map<IEnumerable<Country>, IEnumerable<CountryDTO>>(db.Countries.Find(predicate));
+            var predicate = Mapper.Map<Expression<Func<Country, Boolean>>>(predicateDto);
+            return Mapper.Map<IQueryable<Country>, IEnumerable<CountryDTO>>(db.Countries.Find(predicate));
         }
 
         public CountryDTO GetCountry(int id)
@@ -69,8 +66,8 @@ namespace TravelBlogs.BLL.Services
 
         public IEnumerable<RegionDTO> Find(Func<RegionDTO, bool> predicateDto)
         {
-            Func<Region, bool> predicate = Mapper.Map<Func<RegionDTO, bool>, Func<Region, bool>>(predicateDto);
-            return Mapper.Map<IEnumerable<Region>, IEnumerable<RegionDTO>>(db.Regions.Find(predicate));
+            var predicate = Mapper.Map<Expression<Func<Region, Boolean>>>(predicateDto);
+            return Mapper.Map<IQueryable<Region>, IEnumerable<RegionDTO>>(db.Regions.Find(predicate));
         }
 
         public IEnumerable<RegionDTO> GetRegionsByCountry(int id)
@@ -111,8 +108,8 @@ namespace TravelBlogs.BLL.Services
 
         public IEnumerable<PlaceDTO> Find(Func<PlaceDTO, bool> predicateDto)
         {
-            Func<Place, bool> predicate = Mapper.Map<Func<PlaceDTO, bool>, Func<Place, bool>>(predicateDto);
-            return Mapper.Map<IEnumerable<Place>, IEnumerable<PlaceDTO>>(db.Places.Find(predicate));
+            var predicate = Mapper.Map<Expression<Func<Place, bool>>>(predicateDto);
+            return Mapper.Map<IQueryable<Place>, IEnumerable<PlaceDTO>>(db.Places.Find(predicate));
         }
 
         public IEnumerable<PlaceDTO> GetPlacesByRegion(int id)
@@ -151,5 +148,6 @@ namespace TravelBlogs.BLL.Services
         {
             db.Places.Delete(id);
         }
+      
     }
 }

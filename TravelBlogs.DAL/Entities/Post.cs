@@ -22,9 +22,9 @@ namespace TravelBlogs.DAL.Entities
 
         public DateTime ModificationDate { get; set; }
 
-        public int Rating { get; set; }
+        public int? Rating { get; set; }
 
-        public int CountComments { get; set; }
+        public int? CountComments { get; set; }
 
 
         // Связи с первичными ключами
@@ -33,7 +33,7 @@ namespace TravelBlogs.DAL.Entities
         [ForeignKey("UserId ")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
-        public int PlaceId { get; set; }
+        public int? PlaceId { get; set; }
         [ForeignKey("PlaceId")]
         public virtual Place Place { get; set; }
 

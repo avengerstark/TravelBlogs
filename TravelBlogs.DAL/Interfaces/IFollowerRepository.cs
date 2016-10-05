@@ -13,6 +13,6 @@ namespace TravelBlogs.DAL.Interfaces
 
         void Delete(Follower follower);
 
-        IEnumerable<ApplicationUser> GetFollowersByUser(string userId);
+        IQueryable<ApplicationUser> GetFollowersByUser(string userId);
     }
 }

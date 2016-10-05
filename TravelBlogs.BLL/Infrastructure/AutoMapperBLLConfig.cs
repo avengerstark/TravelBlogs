@@ -28,33 +28,31 @@ namespace TravelBlogs.BLL.Infrastructure
 
                 cfg.CreateMap<Place, PlaceDTO>().ForMember(pl => pl.Posts, opt => opt.Ignore()).ReverseMap();
 
-                cfg.CreateMap<Comment, CommentDTO>().ReverseMap();
+                cfg.CreateMap<Comment, CommentDTO>().ForMember(com => com.User, opt => opt.Ignore()).ReverseMap();
 
                 cfg.CreateMap<CoordinatesInfo, CoordinatesInfoDTO>().ReverseMap();
 
                 cfg.CreateMap<Follower, FollowerDTO>().ReverseMap();
 
                 cfg.CreateMap<Post, PostDTO>().ForMember(post => post.Commets, opt => opt.Ignore())
-                                              .ForMember(p => p.Votes, v => v.Ignore()).ReverseMap();
+                                              .ForMember(p => p.Votes, v => v.Ignore())
+                                              .ForMember(u => u.User, opt => opt.Ignore()).ReverseMap();
 
-                cfg.CreateMap<TravelBlogs.DAL.Entities.Profile, ProfileDTO>().ReverseMap();
+                cfg.CreateMap<TravelBlogs.DAL.Entities.Profile, ProfileDTO>().ForMember(prof => prof.User, opt => opt.Ignore()).ReverseMap();
 
                 cfg.CreateMap<ReplayToComment, ReplayToCommentDTO>().ReverseMap();
 
                 cfg.CreateMap<ApplicationRole, RoleDTO>().ReverseMap();
 
-                cfg.CreateMap<ApplicationUser, UserDTO>().ReverseMap();
+                cfg.CreateMap<ApplicationUser, UserDTO>().ForMember(user => user.Role, opt => opt.Ignore())
+                                                         .ForMember(u => u.Password, p => p.Ignore()).ReverseMap();
 
                 cfg.CreateMap<Vote, VoteDTO>().ReverseMap();
 
-
-
-                cfg.CreateMap<Func<PostDTO, bool>, Func<Post, bool>>().ReverseMap();
-                cfg.CreateMap<Func<CommentDTO, bool>, Func<Comment, bool>>().ReverseMap();
-                cfg.CreateMap<Func<CountryDTO, bool>, Func<Country, bool>>().ReverseMap();
-                cfg.CreateMap<Func<PlaceDTO, bool>, Func<Place, bool>>().ReverseMap();
-                cfg.CreateMap<Func<RegionDTO, bool>, Func<Region, bool>>().ReverseMap();
             });
+
+
+            Mapper.AssertConfigurationIsValid();
     
         } 
     }

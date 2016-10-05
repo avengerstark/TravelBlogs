@@ -87,7 +87,6 @@ namespace TravelBlogs.WEB.Controllers
                 {
                     Email = model.Email,
                     Password = model.Password,
-                    Name = model.Name,
                     Role = "user"
                 };
                 ValidationException validationDetails = await travelService.Users.Create(userDto);
@@ -105,7 +104,6 @@ namespace TravelBlogs.WEB.Controllers
                 Email = "somemail@mail.ru",
                 UserName = "somemail@mail.ru",
                 Password = "ad46D_ewr3",
-                Name = "Семен Семенович Горбунков",
                 Role = "admin",
             }, new List<string> { "user", "admin" });
         }

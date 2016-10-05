@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq.Expressions;
 using TravelBlogs.DAL.EF;
 using TravelBlogs.DAL.Entities;
 using TravelBlogs.DAL.Interfaces;
@@ -30,9 +31,9 @@ namespace TravelBlogs.DAL.Repositories
             return db.Profiles.Find(id);
         }
 
-        public IEnumerable<Profile> Find(Func<Profile, bool> predicate)
+        public IQueryable<Profile> Find(Expression<Func<Profile, bool>> predicate)
         {
-            return db.Profiles.Where(predicate).ToList();
+            return db.Profiles.Where(predicate);
         }
 
         public void Create(Profile item)

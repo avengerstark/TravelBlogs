@@ -27,7 +27,7 @@ namespace TravelBlogs.DAL.Repositories
             _db.Followers.Remove(follower);
         }
 
-        public IEnumerable<ApplicationUser> GetFollowersByUser(string userId)
+        public IQueryable<ApplicationUser> GetFollowersByUser(string userId)
         {
             return _db.Followers.Where(f => f.StarUserId == userId).
                                 Select(f => f.FollowerUser);

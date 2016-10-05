@@ -30,8 +30,7 @@ namespace TravelBlogs.BLL.Services
 
         public IEnumerable<PostDTO> Find(Func<PostDTO, Boolean> predicateDto)
         {
-            Func<Post, Boolean> predicate = Mapper.Map<Func<PostDTO, Boolean>, Func<Post, Boolean>>(predicateDto);
-            return Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(db.Posts.Find(predicate));           
+            throw new NotImplementedException();           
         }
 
         public IEnumerable<PostDTO> GetPostsByUser(string userId)

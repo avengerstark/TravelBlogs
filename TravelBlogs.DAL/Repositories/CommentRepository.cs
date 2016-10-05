@@ -5,6 +5,7 @@ using System.Data.Entity;
 using TravelBlogs.DAL.EF;
 using TravelBlogs.DAL.Entities;
 using TravelBlogs.DAL.Interfaces;
+using System.Linq.Expressions;
 
 
 namespace TravelBlogs.DAL.Repositories
@@ -32,9 +33,10 @@ namespace TravelBlogs.DAL.Repositories
             return db.Comments.Find(id);
         }
 
-        public IEnumerable<Comment> Find(Func<Comment, Boolean> predicate)
+        public IQueryable<Comment> Find(Expression<Func<Comment, Boolean>> predicate)
         {
-            return db.Comments.Where(predicate).ToList();
+
+            return db.Comments.Where(predicate);
         }
 
         public void Create(Comment comment)
@@ -57,27 +59,26 @@ namespace TravelBlogs.DAL.Repositories
         }
 
      
-        public IEnumerable<Comment> GetRepliesToComment(int id)
+        public IQueryable<Comment> GetRepliesToComment(int id)
         {
             return db.RepliesToComment.Where(c => c.MainCommentId == id)
                 .Select(c=>c.RepliesToComment);
         }
 
-        public IEnumerable<Comment> GetCommentsByUser(string userId)
+        public IQueryable<Comment> GetCommentsByUser(string userId)
         {
-            return db.Comments.Where(c => c.UserId == userId).ToList();
+            return db.Comments.Where(c => c.UserId == userId).Select(com => com);
         }
 
+        public IQueryable<Comment> GetCommetsByPost(int postId)
+        {
+            return db.Comments.Where(c => c.PostId == postId).Select(com => com);
+        }
 
         public void AddReplayToComment(ReplayToComment replayToComment)
         {
             db.RepliesToComment.Add(replayToComment);
         }
-
-
-        public IEnumerable<Comment> GetCommetsByPost(int postId)
-        {
-            return db.Comments.Where(c => c.PostId == postId).ToList();
-        }
+     
     }
 }

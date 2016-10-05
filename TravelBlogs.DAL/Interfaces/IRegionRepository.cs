@@ -9,8 +9,7 @@ namespace TravelBlogs.DAL.Interfaces
 {
     public interface IRegionRepository : IRepository<Region>
     {
-        IEnumerable<Region> GetRegions(int countryId);
+        IQueryable<Region> GetRegions(int countryId);
         
-
     }
 }

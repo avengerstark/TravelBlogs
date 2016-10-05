@@ -12,11 +12,11 @@ namespace TravelBlogs.DAL.Interfaces
     {
         void AddReplayToComment(ReplayToComment replayToComment);
 
-        IEnumerable<Comment> GetRepliesToComment(int commentId);
+        IQueryable<Comment> GetRepliesToComment(int commentId);
 
-        IEnumerable<Comment> GetCommetsByPost(int postId);        
+        IQueryable<Comment> GetCommetsByPost(int postId);        
 
-        IEnumerable<Comment> GetCommentsByUser(string userId);
+        IQueryable<Comment> GetCommentsByUser(string userId);
 
     }
 }

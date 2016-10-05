@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 using TravelBlogs.BLL.DTO;
 
 namespace TravelBlogs.BLL.Interfaces
@@ -11,7 +12,7 @@ namespace TravelBlogs.BLL.Interfaces
     {
         IEnumerable<CommentDTO> GetAll();
         IEnumerable<CommentDTO> GetCommetsByPost(int postId);  
-        IEnumerable<CommentDTO> Find(Func<CommentDTO, Boolean> predicate);
+        IEnumerable<CommentDTO> Find(Expression<Func<CommentDTO, Boolean>> predicate);
         IEnumerable<CommentDTO> GetRepliesToComment(int commentId);
         IEnumerable<CommentDTO> GetCommentsByUser(string userId);
         CommentDTO Get(int id);

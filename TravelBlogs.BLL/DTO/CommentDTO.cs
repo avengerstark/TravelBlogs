@@ -23,5 +23,6 @@ namespace TravelBlogs.BLL.DTO
         public UserDTO User { get; set; }
 
         public PostDTO Post { get; set; }
+
     }
 }

@@ -5,6 +5,7 @@ using System.Data.Entity;
 using TravelBlogs.DAL.EF;
 using TravelBlogs.DAL.Entities;
 using TravelBlogs.DAL.Interfaces;
+using System.Linq.Expressions;
 
 namespace TravelBlogs.DAL.Repositories
 {
@@ -30,9 +31,9 @@ namespace TravelBlogs.DAL.Repositories
             return db.Countries.Find(id);
         }
 
-        public IEnumerable<Country> Find(Func<Country, Boolean> predicate)
+        public IQueryable<Country> Find(Expression<Func<Country, Boolean>> predicate)
         {
-            return db.Countries.Where(predicate).ToList();
+            return db.Countries.Where(predicate).Select(c=>c);
         }
 
         public void Create(Country country)
