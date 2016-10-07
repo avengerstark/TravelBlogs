@@ -9,17 +9,14 @@ using TravelBlogs.BLL.Interfaces;
 using TravelBlogs.BLL.DTO;
 using AutoMapper;
 
-
-using TravelBlogs.DAL.Entities;
-
 namespace TravelBlogs.WEB.Controllers
 {
     public class HomeController : Controller
     {
-        readonly ITravelBlogsService travelService;
+        readonly ITravelBlogsService _travelService;
         public HomeController(ITravelBlogsService tbs)
         {
-            travelService = tbs;
+            _travelService = tbs;
         }
 
         // Временно
@@ -27,16 +24,28 @@ namespace TravelBlogs.WEB.Controllers
         public ActionResult Add()
         {
 
-            CountryDTO country = new CountryDTO { Name = "France", Description = "lol" };
-            travelService.Locations.CreateCountry(country);
+            CountryDTO country = new CountryDTO { Name = "Italy", Description = "Mafisrga" };
+            _travelService.Locations.CreateCountry(country);
 
-            RegionDTO region = new RegionDTO { Name = "avgawdfa", Description = "sdevgfawaw", CountryId = country.Id };
-            travelService.Locations.CreateRegion(region);
+            RegionDTO region = new RegionDTO { Name = "Rome", Description = "OaerMG", CountryId = country.Id };
+            _travelService.Locations.CreateRegion(region);
 
-            PlaceDTO place = new PlaceDTO { Name = " arewgawergaqwrg", GeoLat = 5, GeoLong = 85, RegionId = region.Id };
-            travelService.Locations.CreatePlace(place);
+            PlaceDTO place = new PlaceDTO { Name = "Vatiaercan", GeoLat = 85, GeoLong = 20, RegionId = region.Id };
+            _travelService.Locations.CreatePlace(place);
 
-            travelService.Save();
+            PostDTO post = new PostDTO
+            {
+                Title = "WOtrgW",
+                Body = "lotrgstrl",
+                IsApproved = true,
+                CreateDate = DateTime.Now,
+                ModificationDate = DateTime.Now,
+                PlaceId = place.Id,
+                UserId = "18fb76f6-d9a0-4a1f-9dc5-2d602f2228e2"
+            };
+            _travelService.Posts.Create(post);
+
+            _travelService.Save();
 
             return RedirectToAction("Index");
         }
@@ -56,7 +65,7 @@ namespace TravelBlogs.WEB.Controllers
                                                 .BeforeMap((pv, p) => pv.ModificationDate = DateTime.Now)
                                                 .BeforeMap((pv, p) => pv.IsApproved = false));
                 PostDTO post = Mapper.Map<PostViewModel, PostDTO>(postView);
-                travelService.Posts.Create(post);
+                _travelService.Posts.Create(post);
             }
             return RedirectToAction("Index");
         }
@@ -71,21 +80,21 @@ namespace TravelBlogs.WEB.Controllers
 
         public ActionResult GetCountries()
         {
-            List<CountryDTO> model = travelService.Locations.GetAllCountries() as List<CountryDTO>;
+            List<CountryDTO> model = _travelService.Locations.GetAllCountries() as List<CountryDTO>;
             return View(model);
         }
 
 
         public ActionResult FindCountries(Expression<Func<CountryDTO, bool>> pred)
         {
-            List<CountryDTO> countries = (List<CountryDTO>)travelService.Locations.Find(pred);
+            List<CountryDTO> countries = (List<CountryDTO>)_travelService.Locations.Find(pred);
             return View(countries);
         }
         
         public ActionResult SaveCountry(CountryDTO country)
         {
-            travelService.Locations.CreateCountry(country);
-            travelService.Save();
+            _travelService.Locations.CreateCountry(country);
+            _travelService.Save();
             return View(country);
 
         }
@@ -96,7 +105,7 @@ namespace TravelBlogs.WEB.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            travelService.Dispose();
+            _travelService.Dispose();
             base.Dispose(disposing);
         }
 

@@ -11,11 +11,11 @@ namespace TravelBlogs.DAL.Repositories
 {
     public class PlaceRepository : IPlaceRepository
     {
-        private BlogContext db;
+        private readonly BlogContext _db;
 
         public PlaceRepository(BlogContext context)
         {
-            db = context;
+            _db = context;
         }
 
 
@@ -23,42 +23,42 @@ namespace TravelBlogs.DAL.Repositories
 
         public IEnumerable<Place> GetAll()
         {
-            return db.Places;
+            return _db.Places;
         }
 
         public Place Get(int id)
         {
-            return db.Places.Find(id);
+            return _db.Places.Find(id);
         }
 
         public IQueryable<Place> Find(Expression<Func<Place, bool>> predicate)
         {
-            return db.Places.Where(predicate);
+            return _db.Places.Where(predicate);
         }
 
         public void Create(Place item)
         {
-            db.Places.Add(item);
+            _db.Places.Add(item);
         }
 
         public void Update(Place item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            _db.Entry(item).State = EntityState.Modified;
         }
 
         public void Delete(int id)
         {
-            Place place = db.Places.Find(id);
+            Place place = _db.Places.Find(id);
             if (place != null)
             {
-                db.Places.Remove(place);
+                _db.Places.Remove(place);
             }
         }
 
 
         public IQueryable<Place> GetPlaces(int regionId)
         {
-            return db.Places.Where(p => p.RegionId == regionId);
+            return _db.Places.Where(p => p.RegionId == regionId);
         }
    
     }

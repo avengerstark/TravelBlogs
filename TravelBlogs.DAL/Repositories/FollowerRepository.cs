@@ -10,7 +10,7 @@ namespace TravelBlogs.DAL.Repositories
 {
     public class FollowerRepository : IFollowerRepository
     {
-        private BlogContext _db;
+        private readonly BlogContext _db;
 
         public FollowerRepository(BlogContext context)
         {

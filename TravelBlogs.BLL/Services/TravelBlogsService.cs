@@ -10,7 +10,7 @@ namespace TravelBlogs.BLL.Services
 {
     public class TravelBlogsService : ITravelBlogsService
     {
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private CommentService _commentService;
         private LocationService _locationService;
         private PostService _postService;

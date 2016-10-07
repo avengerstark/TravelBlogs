@@ -11,47 +11,47 @@ namespace TravelBlogs.DAL.Repositories
 {
     public class CountryRepository : ICountryRepository
     {
-        private BlogContext db;
+        private readonly BlogContext _db;
 
 
         public CountryRepository(BlogContext context)
         {
-            this.db = context;
+            this._db = context;
         }
 
 
         // Реализуем методы интерфейса
         public IEnumerable<Country> GetAll()
         {
-            return db.Countries;
+            return _db.Countries;
         }
 
         public Country Get(int id)
         {
-            return db.Countries.Find(id);
+            return _db.Countries.Find(id);
         }
 
         public IQueryable<Country> Find(Expression<Func<Country, Boolean>> predicate)
         {
-            return db.Countries.Where(predicate).Select(c=>c);
+            return _db.Countries.Where(predicate).Select(c=>c);
         }
 
         public void Create(Country country)
         {
-            db.Countries.Add(country);
+            _db.Countries.Add(country);
         }
 
         public void Update(Country country)
         {
-            db.Entry(country).State = EntityState.Modified;
+            _db.Entry(country).State = EntityState.Modified;
         }
 
         public void Delete(int id)
         {
-            Country country = db.Countries.Find(id);
+            Country country = _db.Countries.Find(id);
             if (country != null)
             {
-                db.Countries.Remove(country);
+                _db.Countries.Remove(country);
             }
         }
   

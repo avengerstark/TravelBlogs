@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TravelBlogs.BLL.DTO
 {
@@ -20,9 +17,9 @@ namespace TravelBlogs.BLL.DTO
 
         public DateTime ModificationDate { get; set; }
 
-        public int Rating { get; set; }
+        public int? Rating { get; set; }
 
-        public int CountComments { get; set; }
+        public int? CountComments { get; set; }
 
 
         public string UserId { get; set; }

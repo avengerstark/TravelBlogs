@@ -19,6 +19,7 @@ namespace TravelBlogs.DAL.Entities
         public double GeoLat { get; set; } // широта - для карт google
 
         public int RegionId { get; set; }
+
         [ForeignKey("RegionId")]
         public virtual Region Region { get; set; }
 

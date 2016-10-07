@@ -12,46 +12,46 @@ namespace TravelBlogs.DAL.Repositories
     public class PostRepository : IPostRepository
     {
 
-        private BlogContext db;
+        private readonly BlogContext _db;
 
         public PostRepository(BlogContext context)
         {
-            db = context;
+            _db = context;
         }
 
         // Реализуем интерфейс
 
         public IEnumerable<Post> GetAll()
         {
-            return db.Posts;
+            return _db.Posts;
         }
 
         public Post Get(int id)
         {
-            return db.Posts.Find(id);
+            return _db.Posts.Find(id);
         }
 
         public IQueryable<Post> Find(Expression<Func<Post, bool>> predicate)
         {
-            return db.Posts.Where(predicate);
+            return _db.Posts.Where(predicate);
         }
 
         public void Create(Post item)
         {
-            db.Posts.Add(item);
+            _db.Posts.Add(item);
         }
 
         public void Update(Post item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            _db.Entry(item).State = EntityState.Modified;
         }
 
         public void Delete(int id)
         {
-            Post post = db.Posts.Find(id);
+            Post post = _db.Posts.Find(id);
             if (post != null)
             {
-                db.Posts.Remove(post);
+                _db.Posts.Remove(post);
             }
         }
 
@@ -60,21 +60,23 @@ namespace TravelBlogs.DAL.Repositories
 
         public IQueryable<Post> GetPostsByUser(string id)
         {
-            return db.Posts.Where(p => p.UserId == id);
+            return _db.Posts.Where(p => p.UserId == id);
         }
 
 
 
         public void Evaluate(Vote vote)
         {
-            db.Votes.Add(vote);
+            _db.Votes.Add(vote);
         }
 
 
 
         public void DeleteEvaluate(Vote vote)
         {
-            db.Votes.Remove(vote);
+            _db.Votes.Remove(vote);
         }
+
+
     }
 }

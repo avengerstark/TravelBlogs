@@ -12,53 +12,53 @@ namespace TravelBlogs.DAL.Repositories
     public class ProfileRepository : IProfileRepository
     {
 
-        private BlogContext db;
+        private readonly BlogContext _db;
 
         public ProfileRepository(BlogContext context)
         {
-            db = context;
+            _db = context;
         }
 
         // Реализуем интерфейс
 
         public IEnumerable<Profile> GetAll()
         {
-            return db.Profiles;
+            return _db.Profiles;
         }
 
         public Profile Get(int id)
         {
-            return db.Profiles.Find(id);
+            return _db.Profiles.Find(id);
         }
 
         public IQueryable<Profile> Find(Expression<Func<Profile, bool>> predicate)
         {
-            return db.Profiles.Where(predicate);
+            return _db.Profiles.Where(predicate);
         }
 
         public void Create(Profile item)
         {
-            db.Profiles.Add(item);
+            _db.Profiles.Add(item);
         }
 
         public void Update(Profile item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            _db.Entry(item).State = EntityState.Modified;
         }
 
         public void Delete(int id)
         {
-            Profile profile = db.Profiles.Find(id);
+            Profile profile = _db.Profiles.Find(id);
             if (profile != null)
             {
-                db.Profiles.Remove(profile);
+                _db.Profiles.Remove(profile);
             }
         }
 
 
         public Profile GetProfileByUser(string userId)
         {
-            return db.Profiles.Where(p => p.UserId == userId).FirstOrDefault();
+            return _db.Profiles.Where(p => p.UserId == userId).FirstOrDefault();
         }
 
     }

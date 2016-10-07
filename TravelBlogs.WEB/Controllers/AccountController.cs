@@ -45,7 +45,8 @@ namespace TravelBlogs.WEB.Controllers
             await SetInitialDataAsync();
             if (ModelState.IsValid)
             {
-                UserDTO userDto = new UserDTO { Email = model.Email, Password = model.Password};
+                UserDTO userDto = new UserDTO{ Email = model.Email, Password = model.Password};
+
                 ClaimsIdentity claim = await travelService.Users.Authenticate(userDto);
                 if (claim == null)
                 {
@@ -87,6 +88,7 @@ namespace TravelBlogs.WEB.Controllers
                 {
                     Email = model.Email,
                     Password = model.Password,
+                    UserName = model.Name,
                     Role = "user"
                 };
                 ValidationException validationDetails = await travelService.Users.Create(userDto);

@@ -27,13 +27,12 @@ namespace TravelBlogs.DAL.Entities
         public int? CountComments { get; set; }
 
 
-        // Связи с первичными ключами
-
+         // Связи с первичными ключами
         public string UserId { get; set; }
-        [ForeignKey("UserId ")]
+        //[ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
-        public int? PlaceId { get; set; }
+        public int PlaceId { get; set; }
         [ForeignKey("PlaceId")]
         public virtual Place Place { get; set; }
 

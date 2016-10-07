@@ -15,44 +15,44 @@ namespace TravelBlogs.BLL.Services
 {
     public class LocationService : ILocationService
     {
-        private IUnitOfWork db;
+        private readonly IUnitOfWork _db;
 
         public LocationService(IUnitOfWork uow)
         {
-            this.db = uow;
+            this._db = uow;
         }
 
         public IEnumerable<CountryDTO> GetAllCountries()
         {
-            return Mapper.Map<IEnumerable<Country>, IEnumerable<CountryDTO>>(db.Countries.GetAll());
+            return Mapper.Map<IEnumerable<Country>, IEnumerable<CountryDTO>>(_db.Countries.GetAll());
         }
 
         public IEnumerable<CountryDTO> Find(Expression<Func<CountryDTO, Boolean>> predicateDto)
         {
             var predicate = Mapper.Map<Expression<Func<Country, Boolean>>>(predicateDto);
-            return Mapper.Map<IQueryable<Country>, IEnumerable<CountryDTO>>(db.Countries.Find(predicate));
+            return Mapper.Map<IQueryable<Country>, IEnumerable<CountryDTO>>(_db.Countries.Find(predicate));
         }
 
         public CountryDTO GetCountry(int id)
         {
-            return Mapper.Map<Country, CountryDTO>(db.Countries.Get(id));
+            return Mapper.Map<Country, CountryDTO>(_db.Countries.Get(id));
         }
 
         public void CreateCountry(CountryDTO countryDto)
         {
             Country country = Mapper.Map<CountryDTO, Country>(countryDto);
-            db.Countries.Create(country);
+            _db.Countries.Create(country);
         }
 
         public void UpdateCountry(CountryDTO countryDto)
         {
             Country country = Mapper.Map<CountryDTO, Country>(countryDto);
-            db.Countries.Update(country);
+            _db.Countries.Update(country);
         }
 
         public void DeleteCountry(int id)
         {
-            db.Countries.Delete(id);
+            _db.Countries.Delete(id);
         }
 
 
@@ -61,40 +61,40 @@ namespace TravelBlogs.BLL.Services
 
         public IEnumerable<RegionDTO> GetAllRegions()
         {
-            return Mapper.Map<IEnumerable<Region>, IEnumerable<RegionDTO>>(db.Regions.GetAll());
+            return Mapper.Map<IEnumerable<Region>, IEnumerable<RegionDTO>>(_db.Regions.GetAll());
         }
 
         public IEnumerable<RegionDTO> Find(Func<RegionDTO, bool> predicateDto)
         {
             var predicate = Mapper.Map<Expression<Func<Region, Boolean>>>(predicateDto);
-            return Mapper.Map<IQueryable<Region>, IEnumerable<RegionDTO>>(db.Regions.Find(predicate));
+            return Mapper.Map<IQueryable<Region>, IEnumerable<RegionDTO>>(_db.Regions.Find(predicate));
         }
 
         public IEnumerable<RegionDTO> GetRegionsByCountry(int id)
         {
-            return Mapper.Map<IEnumerable<Region>, IEnumerable<RegionDTO>>(db.Regions.GetRegions(id));
+            return Mapper.Map<IEnumerable<Region>, IEnumerable<RegionDTO>>(_db.Regions.GetRegions(id));
         }
 
         public RegionDTO GetRegion(int id)
         {
-            return Mapper.Map<Region, RegionDTO>(db.Regions.Get(id));
+            return Mapper.Map<Region, RegionDTO>(_db.Regions.Get(id));
         }
 
         public void CreateRegion(RegionDTO regionDto)
         {
             Region region = Mapper.Map<RegionDTO, Region>(regionDto);
-            db.Regions.Create(region);
+            _db.Regions.Create(region);
         }
 
         public void UpdateRegion(RegionDTO regionDto)
         {
             Region region = Mapper.Map<RegionDTO, Region>(regionDto);
-            db.Regions.Update(region);
+            _db.Regions.Update(region);
         }
 
         public void DeleteRegion(int id)
         {
-            db.Regions.Delete(id);
+            _db.Regions.Delete(id);
         }
 
 
@@ -103,23 +103,23 @@ namespace TravelBlogs.BLL.Services
 
         public IEnumerable<PlaceDTO> GetAllPlaces()
         {
-            return Mapper.Map<IEnumerable<Place>, IEnumerable<PlaceDTO>>(db.Places.GetAll());
+            return Mapper.Map<IEnumerable<Place>, IEnumerable<PlaceDTO>>(_db.Places.GetAll());
         }
 
         public IEnumerable<PlaceDTO> Find(Func<PlaceDTO, bool> predicateDto)
         {
             var predicate = Mapper.Map<Expression<Func<Place, bool>>>(predicateDto);
-            return Mapper.Map<IQueryable<Place>, IEnumerable<PlaceDTO>>(db.Places.Find(predicate));
+            return Mapper.Map<IQueryable<Place>, IEnumerable<PlaceDTO>>(_db.Places.Find(predicate));
         }
 
         public IEnumerable<PlaceDTO> GetPlacesByRegion(int id)
         {
-            return Mapper.Map<IEnumerable<Place>, IEnumerable<PlaceDTO>>(db.Places.GetPlaces(id));
+            return Mapper.Map<IEnumerable<Place>, IEnumerable<PlaceDTO>>(_db.Places.GetPlaces(id));
         }
 
         public PlaceDTO GetPlace(int id)
         {
-            return Mapper.Map<Place, PlaceDTO>(db.Places.Get(id));
+            return Mapper.Map<Place, PlaceDTO>(_db.Places.Get(id));
         }
 
         public void CreatePlace(PlaceDTO placeDto)
@@ -135,18 +135,18 @@ namespace TravelBlogs.BLL.Services
 
          
             Place place = Mapper.Map<PlaceDTO, Place>(placeDto);
-            db.Places.Create(place);
+            _db.Places.Create(place);
         }
 
         public void UpdatePlace(PlaceDTO placeDto)
         {
             Place place = Mapper.Map<PlaceDTO, Place>(placeDto);
-            db.Places.Update(place);
+            _db.Places.Update(place);
         }
 
         public void DeletePlace(int id)
         {
-            db.Places.Delete(id);
+            _db.Places.Delete(id);
         }
       
     }

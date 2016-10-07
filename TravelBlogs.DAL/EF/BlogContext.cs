@@ -1,6 +1,7 @@
 ﻿using TravelBlogs.DAL.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using System.Runtime.CompilerServices;
 
 namespace TravelBlogs.DAL.EF
 {
@@ -28,7 +29,7 @@ namespace TravelBlogs.DAL.EF
 
 
 
-        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             
             // Составной ключ таблицы Follower
@@ -60,10 +61,34 @@ namespace TravelBlogs.DAL.EF
 
             modelBuilder.Entity<Comment>()
             .HasMany(u => u.RepliesToComment)
-            .WithRequired(u => u.RepliesToComment)
+            .WithRequired(u => u.RepliesToComment)  
             .WillCascadeOnDelete(false);
 
 
+            // Отключаем каскадное удаление у таблиц Vote - Post
+            modelBuilder.Entity<Post>()
+                .HasMany(p=>p.Votes)
+                .WithRequired(v=>v.Post)
+                .WillCascadeOnDelete(false);
+
+            // Отключаем каскадное удаление у таблиц ApplicationUser - Post
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(u=>u.Votes)
+                .WithRequired(v=>v.ApplicationUser)
+                .WillCascadeOnDelete(false);
+
+
+
+
+            modelBuilder.Entity<Post>()
+                .HasOptional(p => p.ApplicationUser)
+                .WithMany(u => u.Posts)
+                .HasForeignKey(post => post.UserId);
+
+            //modelBuilder.Entity<ApplicationUser>()
+            //    .HasMany(u=>u.Posts)
+            //    .WithRequired(p=>p.ApplicationUser)
+            //    .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
         }

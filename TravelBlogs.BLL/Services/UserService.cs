@@ -17,23 +17,24 @@ namespace TravelBlogs.BLL.Services
     public class UserService : IUserService
     {
 
-        private IUnitOfWork db;
+        private readonly IUnitOfWork _db;
 
         public UserService(IUnitOfWork uow)
         {
-            this.db = uow;
+            this._db = uow;
         }
 
-        public async Task<ValidationException> Create(DTO.UserDTO userDto)
+        public async Task<ValidationException> Create(UserDTO userDto)
         {
-            ApplicationUser user = await db.UserManager.FindByEmailAsync(userDto.Email);
+            ApplicationUser user = await _db.UserManager.FindByEmailAsync(userDto.Email);
             if (user == null)
             {
-                user = new ApplicationUser { Email = userDto.Email, UserName = userDto.Email };
-                await db.UserManager.CreateAsync(user, userDto.Password);
+                user = new ApplicationUser { Email = userDto.Email, UserName = userDto.UserName };
+                //user = Mapper.Map<UserDTO, ApplicationUser>(userDto);
+                await _db.UserManager.CreateAsync(user, userDto.Password);
                 // добовляем роль
-                await db.UserManager.AddToRoleAsync(user.Id, userDto.Role);
-                await db.SaveAsync();
+                await _db.UserManager.AddToRoleAsync(user.Id, userDto.Role);
+                await _db.SaveAsync();
                 return new ValidationException("Регистрация успешно пройдена", "", true);
             }
             else
@@ -46,11 +47,11 @@ namespace TravelBlogs.BLL.Services
         public async Task<ClaimsIdentity> Authenticate(DTO.UserDTO userDto)
         {
             ClaimsIdentity claim = null;
-            ApplicationUser user = await db.UserManager.FindAsync(userDto.Email, userDto.Password);
+            ApplicationUser user = await _db.UserManager.FindAsync(userDto.Email, userDto.Password);
             // авторизуем его и возвращаем объект ClaimsIdentity
             if (user != null)
             {
-                claim = await db.UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                claim = await _db.UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             }
             return claim;
         }
@@ -59,11 +60,11 @@ namespace TravelBlogs.BLL.Services
         {
             foreach (string roleName in roles)
             {
-                ApplicationRole role = await db.RoleManager.FindByNameAsync(roleName);
+                ApplicationRole role = await _db.RoleManager.FindByNameAsync(roleName);
                 if (role == null)
                 {
                     role = new ApplicationRole {Name = roleName};
-                    await db.RoleManager.CreateAsync(role);
+                    await _db.RoleManager.CreateAsync(role);
                 }
             }
             await Create(adminDto);

@@ -12,11 +12,11 @@ namespace TravelBlogs.DAL.Repositories
     public class RegionRepository : IRegionRepository
     {
 
-        private BlogContext db;
+        private readonly BlogContext _db;
 
         public RegionRepository(BlogContext context)
         {
-            db = context;
+            _db = context;
         }
 
 
@@ -24,41 +24,41 @@ namespace TravelBlogs.DAL.Repositories
 
         public IEnumerable<Region> GetAll()
         {
-            return db.Regions;
+            return _db.Regions;
         }
 
         public Region Get(int id)
         {
-            return db.Regions.Find(id);
+            return _db.Regions.Find(id);
         }
 
         public IQueryable<Region> Find(Expression<Func<Region, bool>> predicate)
         {
-            return db.Regions.Where(predicate);
+            return _db.Regions.Where(predicate);
         }
 
         public void Create(Region item)
         {
-            db.Regions.Add(item);
+            _db.Regions.Add(item);
         }
 
         public void Update(Region item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            _db.Entry(item).State = EntityState.Modified;
         }
 
         public void Delete(int id)
         {
-            Region region = db.Regions.Find();
+            Region region = _db.Regions.Find();
             if (region != null)
             {
-                db.Regions.Remove(region);
+                _db.Regions.Remove(region);
             }
         }
 
         public IQueryable<Region> GetRegions(int countryId)
         {
-            return db.Regions.Where(r => r.CountryId == countryId);
+            return _db.Regions.Where(r => r.CountryId == countryId);
         }
     }
 }
