@@ -29,12 +29,10 @@ namespace TravelBlogs.BLL.Services
             ApplicationUser user = await _db.UserManager.FindByEmailAsync(userDto.Email);
             if (user == null)
             {
-                user = new ApplicationUser { Email = userDto.Email, UserName = userDto.UserName };
-                //user = Mapper.Map<UserDTO, ApplicationUser>(userDto);
+                user = new ApplicationUser { Email = userDto.Email, UserName = userDto.Email };
                 await _db.UserManager.CreateAsync(user, userDto.Password);
                 // добовляем роль
                 await _db.UserManager.AddToRoleAsync(user.Id, userDto.Role);
-                await _db.SaveAsync();
                 return new ValidationException("Регистрация успешно пройдена", "", true);
             }
             else
@@ -44,10 +42,10 @@ namespace TravelBlogs.BLL.Services
             
         }
 
-        public async Task<ClaimsIdentity> Authenticate(DTO.UserDTO userDto)
+        public async Task<ClaimsIdentity> Authenticate(string email, string password)
         {
             ClaimsIdentity claim = null;
-            ApplicationUser user = await _db.UserManager.FindAsync(userDto.Email, userDto.Password);
+            ApplicationUser user = await _db.UserManager.FindAsync(email, password);
             // авторизуем его и возвращаем объект ClaimsIdentity
             if (user != null)
             {
@@ -55,6 +53,18 @@ namespace TravelBlogs.BLL.Services
             }
             return claim;
         }
+
+
+        public async Task<ValidationException> ChangePassword(string userId, string oldPassword, string newPassword)
+        {
+            IdentityResult result = await _db.UserManager.ChangePasswordAsync(userId, oldPassword, newPassword);
+            if (result.Succeeded)
+            {
+                return new ValidationException("Ваш пароль изменен","", true);
+            }
+            return new ValidationException("Не удалось изменить ваш пароль","Password", false);
+        }
+
 
         public async Task SetInitialData(DTO.UserDTO adminDto, List<string> roles)
         {
@@ -69,5 +79,8 @@ namespace TravelBlogs.BLL.Services
             }
             await Create(adminDto);
         }
+
+
+
     }
 }

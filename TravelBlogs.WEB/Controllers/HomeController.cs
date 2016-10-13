@@ -19,6 +19,12 @@ namespace TravelBlogs.WEB.Controllers
             _travelService = tbs;
         }
 
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         // Временно
 
         public ActionResult Add()
@@ -46,6 +52,11 @@ namespace TravelBlogs.WEB.Controllers
             _travelService.Posts.Create(post);
 
             _travelService.Save();
+
+
+
+
+            
 
             return RedirectToAction("Index");
         }

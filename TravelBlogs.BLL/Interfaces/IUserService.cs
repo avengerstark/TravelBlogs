@@ -12,7 +12,8 @@ namespace TravelBlogs.BLL.Interfaces
     public interface IUserService
     {
         Task<ValidationException> Create(UserDTO userDto); // создание пользователей
-        Task<ClaimsIdentity> Authenticate(UserDTO userDto); // аутентификация пользователей
+        Task<ClaimsIdentity> Authenticate(string email, string password); // аутентификация пользователей
+        Task<ValidationException> ChangePassword(string userId, string oldPassword, string newPassword); // смена пароля
         Task SetInitialData(UserDTO adminDto, List<string> roles); // установка начальных данных в БД - админа и списка ролей
     }
 }
