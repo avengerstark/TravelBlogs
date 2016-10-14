@@ -39,24 +39,7 @@ namespace TravelBlogs.WEB.Controllers
             PlaceDTO place = new PlaceDTO { Name = "Vatiaercan", GeoLat = 85, GeoLong = 20, RegionId = region.Id };
             _travelService.Locations.CreatePlace(place);
 
-            PostDTO post = new PostDTO
-            {
-                Title = "WOtrgW",
-                Body = "lotrgstrl",
-                IsApproved = true,
-                CreateDate = DateTime.Now,
-                ModificationDate = DateTime.Now,
-                PlaceId = place.Id,
-                UserId = "18fb76f6-d9a0-4a1f-9dc5-2d602f2228e2"
-            };
-            _travelService.Posts.Create(post);
-
             _travelService.Save();
-
-
-
-
-            
 
             return RedirectToAction("Index");
         }

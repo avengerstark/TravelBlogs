@@ -161,8 +161,8 @@ namespace TravelBlogs.WEB.Controllers
         {
             await _travelService.Users.SetInitialData(new UserDTO
             {
-                Email = "somemail@mail.ru",
-                UserName = "somemail@mail.ru",
+                Email = "avengerstark99@gmail.com",
+                UserName = "avengerstark99@gmail.com",
                 Password = "ad46D_ewr3",
                 Role = "admin",
             }, new List<string> { "user", "admin" });

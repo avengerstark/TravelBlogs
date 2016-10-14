@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using System.ComponentModel.DataAnnotations;
 namespace TravelBlogs.WEB.Models
 {
     public class PostViewModel
     {
-        public int Id { get; set; }
-
+        [Required]
+        [Display(Name = "Заглавие")]
         public string Title { get; set; }
 
+        [Required]
+        [Display(Name = "Основная часть")]
         public string Body { get; set; }
 
         public bool IsApproved { get; set; }
