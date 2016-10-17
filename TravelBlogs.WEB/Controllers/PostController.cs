@@ -24,7 +24,12 @@ namespace TravelBlogs.WEB.Controllers
         public ActionResult GetPost(int id)
         {
             PostDTO post = _travelService.Posts.Get(id);
-            return View(post);
+            PostViewModel postView = new PostViewModel
+            {
+                Title = post.Title,
+                Body = post.Body
+            };
+            return View(postView);
         }
 
         public ActionResult CreatePost()

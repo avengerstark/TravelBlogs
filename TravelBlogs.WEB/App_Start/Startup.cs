@@ -10,6 +10,7 @@ using TravelBlogs.BLL.Infrastructure;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Optimization;
+using TravelBlogs.WEB.Infrastructure;;
 
 [assembly: OwinStartup(typeof(TravelBlogs.WEB.App_Start.Startup))]
 namespace TravelBlogs.WEB.App_Start
@@ -30,6 +31,7 @@ namespace TravelBlogs.WEB.App_Start
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutoMapperBLLConfig.Configure();
+            AutoMapperWEBConfig.Configure();
             
         }
     }

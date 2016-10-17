@@ -9,6 +9,8 @@ namespace TravelBlogs.BLL.DTO
 
         public string Title { get; set; }
 
+        public string DisplayBody { get; set; }
+
         public string Body { get; set; }
 
         public bool IsApproved { get; set; }

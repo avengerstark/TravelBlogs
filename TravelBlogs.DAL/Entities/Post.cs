@@ -14,6 +14,8 @@ namespace TravelBlogs.DAL.Entities
         [Required]
         public string Title { get; set; }
         [Required]
+        public string DisplayBody { get; set; }
+        [Required]
         public string Body { get; set; }
         [Required]
         public bool IsApproved { get; set; }

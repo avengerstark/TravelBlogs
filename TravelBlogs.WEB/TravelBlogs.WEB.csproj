@@ -183,6 +183,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\AutoMapperWEBConfig.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
@@ -195,7 +196,6 @@
     <Compile Include="Models\RegionViewModel.cs" />
     <Compile Include="Models\ReplayToCommentViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
-    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\VoteViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -244,6 +244,7 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Post\CreatePost.cshtml" />
+    <Content Include="Views\Post\GetPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -259,10 +260,6 @@
     <ProjectReference Include="..\TravelBlogs.BLL\TravelBlogs.BLL.csproj">
       <Project>{d469bcef-43d7-4e62-aa7f-fc0aeb63292d}</Project>
       <Name>TravelBlogs.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TravelBlogs.DAL\TravelBlogs.DAL.csproj">
-      <Project>{c26727f6-f96e-485e-9a25-a851e62f1c54}</Project>
-      <Name>TravelBlogs.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

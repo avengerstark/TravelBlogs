@@ -8,6 +8,7 @@ namespace TravelBlogs.WEB.Models
     public class VoteViewModel
     {
         public int PostId { get; set; }
+
         public string UserId { get; set; }
 
         public bool IsLike { get; set; }
