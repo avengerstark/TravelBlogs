@@ -8,7 +8,9 @@ using System.Linq.Expressions;
 using TravelBlogs.BLL.Interfaces;
 using TravelBlogs.DAL.Interfaces;
 using TravelBlogs.BLL.DTO;
+using TravelBlogs.BLL.Infrastructure;
 using TravelBlogs.DAL.Entities;
+using TravelBlogs.DAL.Infrastructure;
 
 
 namespace TravelBlogs.BLL.Services
@@ -26,6 +28,8 @@ namespace TravelBlogs.BLL.Services
         {
             return Mapper.Map<IEnumerable<Country>, IEnumerable<CountryDTO>>(_db.Countries.GetAll());
         }
+
+        
 
         public IEnumerable<CountryDTO> Find(Expression<Func<CountryDTO, Boolean>> predicateDto)
         {
@@ -64,10 +68,23 @@ namespace TravelBlogs.BLL.Services
             return Mapper.Map<IEnumerable<Region>, IEnumerable<RegionDTO>>(_db.Regions.GetAll());
         }
 
-        public IEnumerable<RegionDTO> Find(Func<RegionDTO, bool> predicateDto)
+        public IEnumerable<RegionDTO> GetAllRegions(PagingInfoDTO pagingInfoDto)
+        {
+            PagingInfo pagingInfo = Mapper.Map<PagingInfo>(pagingInfoDto);
+            return Mapper.Map<IEnumerable<Region>, IEnumerable<RegionDTO>>(_db.Regions.GetAll(pagingInfo));
+        }
+
+        public IEnumerable<RegionDTO> Find(Expression<Func<RegionDTO, bool>> predicateDto)
         {
             var predicate = Mapper.Map<Expression<Func<Region, Boolean>>>(predicateDto);
             return Mapper.Map<IQueryable<Region>, IEnumerable<RegionDTO>>(_db.Regions.Find(predicate));
+        }
+
+        public IEnumerable<RegionDTO> Find(Expression<Func<RegionDTO, bool>> predicateDto, PagingInfoDTO pagingInfoDto)
+        {
+            var predicate = Mapper.Map<Expression<Func<Region, Boolean>>>(predicateDto);
+            PagingInfo pagingInfo = Mapper.Map<PagingInfo>(pagingInfoDto);
+            return Mapper.Map<IQueryable<Region>, IEnumerable<RegionDTO>>(_db.Regions.Find(predicate, pagingInfo));
         }
 
         public IEnumerable<RegionDTO> GetRegionsByCountry(int id)
@@ -106,10 +123,23 @@ namespace TravelBlogs.BLL.Services
             return Mapper.Map<IEnumerable<Place>, IEnumerable<PlaceDTO>>(_db.Places.GetAll());
         }
 
-        public IEnumerable<PlaceDTO> Find(Func<PlaceDTO, bool> predicateDto)
+        public IEnumerable<PlaceDTO> GetAllPlaces(PagingInfoDTO pagingInfoDto)
+        {
+            PagingInfo pagingInfo = Mapper.Map<PagingInfo>(pagingInfoDto);
+            return Mapper.Map<IEnumerable<Place>, IEnumerable<PlaceDTO>>(_db.Places.GetAll(pagingInfo));
+        }
+
+        public IEnumerable<PlaceDTO> Find(Expression<Func<PlaceDTO, bool>> predicateDto)
         {
             var predicate = Mapper.Map<Expression<Func<Place, bool>>>(predicateDto);
             return Mapper.Map<IQueryable<Place>, IEnumerable<PlaceDTO>>(_db.Places.Find(predicate));
+        }
+
+        public IEnumerable<PlaceDTO> Find(Expression<Func<PlaceDTO, bool>> predicateDto, PagingInfoDTO pagingInfoDto)
+        {
+            var predicate = Mapper.Map<Expression<Func<Place, bool>>>(predicateDto);
+            PagingInfo pagingInfo = Mapper.Map<PagingInfo>(pagingInfoDto);
+            return Mapper.Map<IQueryable<Place>, IEnumerable<PlaceDTO>>(_db.Places.Find(predicate, pagingInfo));
         }
 
         public IEnumerable<PlaceDTO> GetPlacesByRegion(int id)

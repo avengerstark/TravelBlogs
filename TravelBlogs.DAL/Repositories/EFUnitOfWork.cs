@@ -11,7 +11,7 @@ namespace TravelBlogs.DAL.Repositories
 {
     public class EFUnitOfWork : IUnitOfWork
     {
-        private BlogContext _db;
+        private readonly BlogContext _db;
         private CommentRepository _commentRepository;
         private CountryRepository _countryRepository;
         private PlaceRepository _placeRepository;
@@ -32,95 +32,54 @@ namespace TravelBlogs.DAL.Repositories
 
         public ICommentRepository Comments
         {
-            get
-            {
-                if (_commentRepository == null)
-                    _commentRepository = new CommentRepository(_db);
-                return _commentRepository;
-            }
+            get { return _commentRepository ?? (_commentRepository = new CommentRepository(_db)); }
         }
 
         public ICountryRepository Countries
         {
-            get
-            {
-                if (_countryRepository == null)
-                    _countryRepository = new CountryRepository(_db);
-                return _countryRepository;
-            }
+            get { return _countryRepository ?? (_countryRepository = new CountryRepository(_db)); }
         }
 
         public IPlaceRepository Places
         {
-            get
-            {
-                if (_placeRepository == null)
-                    _placeRepository = new PlaceRepository(_db);
-                return _placeRepository;
-            }
+            get { return _placeRepository ?? (_placeRepository = new PlaceRepository(_db)); }
         }
 
         public IPostRepository Posts
         {
-            get
-            {
-                if (_postRepository == null)
-                    _postRepository = new PostRepository(_db);
-                return _postRepository;
-            }
+            get { return _postRepository ?? (_postRepository = new PostRepository(_db)); }
         }
 
         public IProfileRepository Profiles
         {
-            get
-            {
-                if (_profileRepository == null)
-                    _profileRepository = new ProfileRepository(_db);
-                return _profileRepository;
-            }
+            get { return _profileRepository ?? (_profileRepository = new ProfileRepository(_db)); }
         }
 
         public IRegionRepository Regions
         {
-            get
-            {
-                if (_regionRepository == null)
-                    _regionRepository = new RegionRepository(_db);
-                return _regionRepository;
-            }
+            get { return _regionRepository ?? (_regionRepository = new RegionRepository(_db)); }
         }
 
 
 
         public IFollowerRepository Followers
         {
-            get
-            {
-                if (_followerRepository == null)
-                    _followerRepository = new FollowerRepository(_db);
-                return _followerRepository;
-            }
+            get { return _followerRepository ?? (_followerRepository = new FollowerRepository(_db)); }
         }
 
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                if (_userManager == null)
-                    _userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(_db));
-                return _userManager;
+            get {
+                return _userManager ?? (_userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(_db)));
             }
 
         }
 
         public ApplicationRoleManager RoleManager
         {
-            get
-            {
-                if (_roleManager == null)
-                    _roleManager = new ApplicationRoleManager( new RoleStore<ApplicationRole>(_db));
-                return _roleManager;
+            get {
+                return _roleManager ?? (_roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(_db)));
             }
         }
 

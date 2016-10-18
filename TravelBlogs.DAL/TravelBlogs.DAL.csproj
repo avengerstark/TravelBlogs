@@ -71,6 +71,7 @@
     <Compile Include="Entities\Vote.cs" />
     <Compile Include="Identity\ApplicationRoleManagercs.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
+    <Compile Include="Infrastructure\PagingInfo.cs" />
     <Compile Include="Interfaces\ICommentRepository.cs" />
     <Compile Include="Interfaces\ICountryRepository.cs" />
     <Compile Include="Interfaces\IFollowerRepository.cs" />

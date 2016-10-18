@@ -70,7 +70,7 @@ namespace TravelBlogs.BLL.Services
         }
 
 
-        public void Save()
+        public void SaveChanges()
         {
             _unitOfWork.SaveAsync();
         }

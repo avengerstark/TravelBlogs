@@ -8,7 +8,9 @@ using AutoMapper;
 using TravelBlogs.BLL.Interfaces;
 using TravelBlogs.DAL.Interfaces;
 using TravelBlogs.BLL.DTO;
+using TravelBlogs.BLL.Infrastructure;
 using TravelBlogs.DAL.Entities;
+using TravelBlogs.DAL.Infrastructure;
 
 namespace TravelBlogs.BLL.Services
 {
@@ -29,11 +31,30 @@ namespace TravelBlogs.BLL.Services
             return Mapper.Map<IEnumerable<Comment>, IEnumerable<CommentDTO>>(_db.Comments.GetAll());
         }
 
+        public IEnumerable<CommentDTO> GetAll(PagingInfoDTO pagingInfoDto)
+        {
+            PagingInfo pagingInfo = Mapper.Map<PagingInfo>(pagingInfoDto);
+            return Mapper.Map<IQueryable<Comment>, IEnumerable<CommentDTO>>(_db.Comments.GetAll(pagingInfo));
+        }
+
         public IEnumerable<CommentDTO> GetCommetsByPost(int postId)
         {
             return Mapper.Map<IQueryable<Comment>, IEnumerable<CommentDTO>>(_db.Comments.GetCommetsByPost(postId));
         }
 
+
+        public IEnumerable<CommentDTO> Find(Expression<Func<CommentDTO, bool>> predicateDto)
+        {
+            var predicate = Mapper.Map<Expression<Func<Comment, Boolean>>>(predicateDto);
+            return Mapper.Map<IQueryable<Comment>, IEnumerable<CommentDTO>>(_db.Comments.Find(predicate));
+        }
+
+        public IEnumerable<CommentDTO> Find(Expression<Func<CommentDTO, bool>> predicateDto, PagingInfoDTO pagingInfoDto)
+        {
+            var predicate = Mapper.Map<Expression<Func<Comment, Boolean>>>(predicateDto);
+            PagingInfo pagingInfo = Mapper.Map<PagingInfo>(pagingInfoDto);
+            return Mapper.Map<IQueryable<Comment>, IEnumerable<CommentDTO>>(_db.Comments.Find(predicate, pagingInfo));
+        }
 
         public IEnumerable<CommentDTO> GetRepliesToComment(int commentId)
         {
@@ -72,13 +93,6 @@ namespace TravelBlogs.BLL.Services
             ReplayToComment replayToComment = Mapper.Map<ReplayToCommentDTO, ReplayToComment>(replayToCommentDto);
             _db.Comments.AddReplayToComment(replayToComment);        
         }
-
-
-
-        public IEnumerable<CommentDTO> Find(Expression<Func<CommentDTO, bool>> predicateDto)
-        {
-            var predicate = Mapper.Map<Expression<Func<Comment, Boolean>>>(predicateDto);
-            return Mapper.Map<IQueryable<Comment>, IEnumerable<CommentDTO>>(_db.Comments.Find(predicate));
-        }
+      
     }
 }

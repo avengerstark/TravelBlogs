@@ -15,6 +15,7 @@ using AutoMapper;
 using System.Linq.Expressions;
 using System.Data.Entity;
 using EntityFramework.Testing;
+using TravelBlogs.BLL.Infrastructure;
 
 namespace TravelBlogs.UnitTests
 {
@@ -87,7 +88,7 @@ namespace TravelBlogs.UnitTests
             var mockSet = new Mock<List<CountryDTO>>();
             mock.Setup(c => c.Locations.GetAllCountries()).Returns(mockSet.Object);
             HomeController controller = new HomeController(mock.Object);
-            CountryDTO country = new CountryDTO{Name = "Germany", Description = "Beer"};
+            CountryDTO country = new CountryDTO{ Name = "Germany", Description = "Beer" };
 
 
             // Act
@@ -95,7 +96,37 @@ namespace TravelBlogs.UnitTests
 
             // Assert
             mock.Verify(c => c.Locations.CreateCountry(country), Times.Once());
-            mock.Verify(c=>c.Save(), Times.Once());
+            mock.Verify(c=>c.SaveChanges(), Times.Once());
+        }
+
+
+        [TestMethod]
+        public void Can_Paginate()
+        {
+            List<PostDTO> posts = new List<PostDTO>
+            {
+                new PostDTO {Title = "wow", Body = "ajsdhbilaudefliawueh"},
+                new PostDTO {Title = "wow", Body = "ajsdhbilaudefliawueh"},
+                new PostDTO {Title = "wow", Body = "ajsdhbilaudefliawueh"},
+                new PostDTO {Title = "wow", Body = "ajsdhbilaudefliawueh"},
+                new PostDTO {Title = "wow", Body = "ajsdhbilaudefliawueh"},
+                new PostDTO {Title = "wow", Body = "ajsdhbilaudefliawueh"},
+                new PostDTO {Title = "wow", Body = "ajsdhbilaudefliawueh"},
+                new PostDTO {Title = "wow", Body = "ajsdhbilaudefliawueh"},
+                new PostDTO {Title = "wow", Body = "ajsdhbilaudefliawueh"}
+            };
+
+            mock.Setup(m => m.Posts.GetAll(It.IsAny<PagingInfoDTO>()))
+                .Returns(posts);
+
+            ITravelBlogsService service = mock.Object;
+
+            PagingInfoDTO paging = new PagingInfoDTO { PageSize = 3, CurrentPage = 200};
+
+            IEnumerable<PostDTO> postDtos = service.Posts.GetAll(paging);
+            paging.TotalItems = postDtos.Count();
+
+            Assert.AreEqual(3, paging.CurrentPage);
         }
 
     }

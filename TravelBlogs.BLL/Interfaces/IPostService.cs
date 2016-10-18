@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TravelBlogs.BLL.DTO;
+using TravelBlogs.BLL.Infrastructure;
 
 namespace TravelBlogs.BLL.Interfaces
 {
     public interface IPostService
     {
         IEnumerable<PostDTO> GetAll();
-        IEnumerable<PostDTO> Find(Func<PostDTO, Boolean> predicate);
+        IEnumerable<PostDTO> GetAll(PagingInfoDTO pagingInfo); 
+        IEnumerable<PostDTO> Find(Expression<Func<PostDTO, Boolean>> predicate, PagingInfoDTO pagingInfoDto);
+        IEnumerable<PostDTO> Find(Expression<Func<PostDTO, Boolean>> predicate);
         IEnumerable<PostDTO> GetPostsByUser(string userId);
         PostDTO Get(int id);
         void Create(PostDTO post);

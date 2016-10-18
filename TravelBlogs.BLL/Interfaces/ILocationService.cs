@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using TravelBlogs.BLL.DTO;
+using TravelBlogs.BLL.Infrastructure;
 
 namespace TravelBlogs.BLL.Interfaces
 {
     public interface ILocationService
     {
-
         IEnumerable<CountryDTO> GetAllCountries();
         IEnumerable<CountryDTO> Find(Expression<Func<CountryDTO, Boolean>> predicate);
         CountryDTO GetCountry (int id);
@@ -19,7 +19,9 @@ namespace TravelBlogs.BLL.Interfaces
         void DeleteCountry(int id);
 
         IEnumerable<RegionDTO> GetAllRegions();
-        IEnumerable<RegionDTO> Find(Func<RegionDTO, Boolean> predicate);
+        IEnumerable<RegionDTO> GetAllRegions(PagingInfoDTO pagingInfoDto);
+        IEnumerable<RegionDTO> Find(Expression<Func<RegionDTO, Boolean>> predicate);
+        IEnumerable<RegionDTO> Find(Expression<Func<RegionDTO, bool>> predicateDto, PagingInfoDTO pagingInfoDto);
         IEnumerable<RegionDTO> GetRegionsByCountry(int id);
         RegionDTO GetRegion(int id);
         void CreateRegion(RegionDTO region);
@@ -27,7 +29,9 @@ namespace TravelBlogs.BLL.Interfaces
         void DeleteRegion(int id);
 
         IEnumerable<PlaceDTO> GetAllPlaces();
-        IEnumerable<PlaceDTO> Find(Func<PlaceDTO, Boolean> predicate);
+        IEnumerable<PlaceDTO> GetAllPlaces(PagingInfoDTO pagingInfoDto);
+        IEnumerable<PlaceDTO> Find(Expression<Func<PlaceDTO, Boolean>> predicate);
+        IEnumerable<PlaceDTO> Find(Expression<Func<PlaceDTO, bool>> predicateDto, PagingInfoDTO pagingInfoDto);
         IEnumerable<PlaceDTO> GetPlacesByRegion(int id);
         PlaceDTO GetPlace(int id);
         void CreatePlace(PlaceDTO region);

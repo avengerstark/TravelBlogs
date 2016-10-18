@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq.Expressions;
 using TravelBlogs.DAL.EF;
 using TravelBlogs.DAL.Entities;
+using TravelBlogs.DAL.Infrastructure;
 using TravelBlogs.DAL.Interfaces;
 
 namespace TravelBlogs.DAL.Repositories
@@ -26,6 +27,15 @@ namespace TravelBlogs.DAL.Repositories
             return _db.Profiles;
         }
 
+        public IQueryable<Profile> GetAll(PagingInfo paging)
+        {
+            paging.TotalItems = _db.Profiles.Count();
+            return _db.Profiles
+                .OrderBy(p => p.Id)
+                .Skip((paging.CurrentPage - 1)*paging.PageSize)
+                .Take(paging.PageSize);
+        }
+
         public Profile Get(int id)
         {
             return _db.Profiles.Find(id);
@@ -34,6 +44,16 @@ namespace TravelBlogs.DAL.Repositories
         public IQueryable<Profile> Find(Expression<Func<Profile, bool>> predicate)
         {
             return _db.Profiles.Where(predicate);
+        }
+
+        public IQueryable<Profile> Find(Expression<Func<Profile, bool>> predicate, PagingInfo paging)
+        {
+            paging.TotalItems = _db.Profiles.Where(predicate).Count();
+            return _db.Profiles
+                .Where(predicate)
+                .OrderBy(p => p.Id)
+                .Skip((paging.CurrentPage - 1)*paging.PageSize)
+                .Take(paging.PageSize);
         }
 
         public void Create(Profile item)
@@ -58,8 +78,7 @@ namespace TravelBlogs.DAL.Repositories
 
         public Profile GetProfileByUser(string userId)
         {
-            return _db.Profiles.Where(p => p.UserId == userId).FirstOrDefault();
+            return _db.Profiles.FirstOrDefault(p => p.UserId == userId);
         }
-
     }
 }

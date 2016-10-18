@@ -5,6 +5,7 @@ using System.Data.Entity;
 using TravelBlogs.DAL.EF;
 using TravelBlogs.DAL.Entities;
 using TravelBlogs.DAL.Interfaces;
+using TravelBlogs.DAL.Infrastructure;
 using System.Linq.Expressions;
 
 namespace TravelBlogs.DAL.Repositories
@@ -16,7 +17,7 @@ namespace TravelBlogs.DAL.Repositories
 
         public CountryRepository(BlogContext context)
         {
-            this._db = context;
+            _db = context;
         }
 
 
@@ -54,6 +55,18 @@ namespace TravelBlogs.DAL.Repositories
                 _db.Countries.Remove(country);
             }
         }
-  
+
+
+
+        public IQueryable<Country> Find(Expression<Func<Country, bool>> predicate, PagingInfo paging)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public IQueryable<Country> GetAll(PagingInfo paging)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
-using TravelBlogs.BLL.Services;
-using TravelBlogs.BLL.Interfaces;
-using TravelBlogs.BLL.Infrastructure;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Optimization;
-using TravelBlogs.WEB.Infrastructure;;
+using TravelBlogs.WEB.Infrastructure;
 
 [assembly: OwinStartup(typeof(TravelBlogs.WEB.App_Start.Startup))]
 namespace TravelBlogs.WEB.App_Start
@@ -30,8 +25,7 @@ namespace TravelBlogs.WEB.App_Start
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AutoMapperBLLConfig.Configure();
-            AutoMapperWEBConfig.Configure();
+            MapperInitialize.Configure();
             
         }
     }

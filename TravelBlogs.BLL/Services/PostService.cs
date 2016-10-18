@@ -8,7 +8,9 @@ using AutoMapper;
 using TravelBlogs.BLL.Interfaces;
 using TravelBlogs.DAL.Interfaces;
 using TravelBlogs.BLL.DTO;
+using TravelBlogs.BLL.Infrastructure;
 using TravelBlogs.DAL.Entities;
+using TravelBlogs.DAL.Infrastructure;
 
 namespace TravelBlogs.BLL.Services
 {
@@ -18,7 +20,7 @@ namespace TravelBlogs.BLL.Services
 
         public PostService(IUnitOfWork uow)
         {
-            this._db = uow;
+            _db = uow;
         }
 
 
@@ -29,10 +31,23 @@ namespace TravelBlogs.BLL.Services
             return Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(_db.Posts.GetAll());
         }
 
-        public IEnumerable<PostDTO> Find(Func<PostDTO, Boolean> predicateDto)
+        public IEnumerable<PostDTO> GetAll(PagingInfoDTO pagingInfoDto)
+        {
+            PagingInfo pagingInfo = Mapper.Map<PagingInfo>(pagingInfoDto);
+            return Mapper.Map<IQueryable<Post>, IEnumerable<PostDTO>>(_db.Posts.GetAll(pagingInfo));
+        }
+
+        public IEnumerable<PostDTO> Find(Expression<Func<PostDTO, Boolean>> predicateDto)
         {
             var predicate = Mapper.Map<Expression<Func<Post, Boolean>>>(predicateDto);
             return Mapper.Map<IQueryable<Post>, IEnumerable<PostDTO>>(_db.Posts.Find(predicate));
+        }
+
+        public IEnumerable<PostDTO> Find(Expression<Func<PostDTO, bool>> predicateDto, PagingInfoDTO pagingInfoDto)
+        {
+            var predicate = Mapper.Map<Expression<Func<Post, Boolean>>>(predicateDto);
+            PagingInfo pagingInfo = Mapper.Map<PagingInfo>(pagingInfoDto);
+            return Mapper.Map<IQueryable<Post>, IEnumerable<PostDTO>>(_db.Posts.Find(predicate, pagingInfo));
         }
 
         public IEnumerable<PostDTO> GetPostsByUser(string userId)
@@ -73,5 +88,6 @@ namespace TravelBlogs.BLL.Services
             Vote vote = Mapper.Map<VoteDTO, Vote>(voteDto);
             _db.Posts.DeleteEvaluate(vote);
         }
+   
     }
 }

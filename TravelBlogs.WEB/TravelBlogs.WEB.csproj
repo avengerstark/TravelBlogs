@@ -184,6 +184,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AutoMapperWEBConfig.cs" />
+    <Compile Include="Infrastructure\MapperInitialize.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />

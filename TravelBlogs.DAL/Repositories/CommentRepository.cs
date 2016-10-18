@@ -6,6 +6,7 @@ using TravelBlogs.DAL.EF;
 using TravelBlogs.DAL.Entities;
 using TravelBlogs.DAL.Interfaces;
 using System.Linq.Expressions;
+using TravelBlogs.DAL.Infrastructure;
 
 
 namespace TravelBlogs.DAL.Repositories
@@ -28,6 +29,15 @@ namespace TravelBlogs.DAL.Repositories
             return _db.Comments;
         }
 
+        public IQueryable<Comment> GetAll(PagingInfo paging)
+        {
+            paging.TotalItems = _db.Comments.Count();
+            return _db.Comments
+                .OrderBy(c => c.Id)
+                .Skip((paging.CurrentPage - 1)*paging.PageSize)
+                .Take(paging.PageSize);
+        }
+
         public Comment Get(int id)
         {
             return _db.Comments.Find(id);
@@ -37,6 +47,16 @@ namespace TravelBlogs.DAL.Repositories
         {
 
             return _db.Comments.Where(predicate);
+        }
+
+        public IQueryable<Comment> Find(Expression<Func<Comment, bool>> predicate, PagingInfo paging)
+        {
+            paging.TotalItems = _db.Comments.Where(predicate).Count();
+            return _db.Comments
+                .Where(predicate)
+                .OrderBy(c => c.Id)
+                .Skip((paging.CurrentPage - 1)*paging.PageSize)
+                .Take(paging.PageSize);
         }
 
         public void Create(Comment comment)
@@ -79,6 +99,5 @@ namespace TravelBlogs.DAL.Repositories
         {
             _db.RepliesToComment.Add(replayToComment);
         }
-     
     }
 }

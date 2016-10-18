@@ -29,17 +29,17 @@ namespace TravelBlogs.WEB.Controllers
 
         public ActionResult Add()
         {
-
-            CountryDTO country = new CountryDTO { Name = "Italy", Description = "Mafisrga" };
+            CountryDTO country = new CountryDTO { Name = "Spasergin", Description = "Inquisition" };
             _travelService.Locations.CreateCountry(country);
 
-            RegionDTO region = new RegionDTO { Name = "Rome", Description = "OaerMG", CountryId = country.Id };
+            RegionDTO region = new RegionDTO { Name = "Rosrgme", Description = "OaerMG", CountryId = country.Id };
             _travelService.Locations.CreateRegion(region);
 
-            PlaceDTO place = new PlaceDTO { Name = "Vatiaercan", GeoLat = 85, GeoLong = 20, RegionId = region.Id };
+            PlaceDTO place = new PlaceDTO { Name = "Vatisergaercan", GeoLat = 85, GeoLong = 20, RegionId = region.Id };
             _travelService.Locations.CreatePlace(place);
 
-            _travelService.Save();
+            _travelService.SaveChanges();
+
 
             return RedirectToAction("Index");
         }
@@ -88,7 +88,7 @@ namespace TravelBlogs.WEB.Controllers
         public ActionResult SaveCountry(CountryDTO country)
         {
             _travelService.Locations.CreateCountry(country);
-            _travelService.Save();
+            _travelService.SaveChanges();
             return View(country);
 
         }

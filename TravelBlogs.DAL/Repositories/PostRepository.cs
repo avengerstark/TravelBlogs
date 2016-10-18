@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq.Expressions;
 using TravelBlogs.DAL.EF;
 using TravelBlogs.DAL.Entities;
+using TravelBlogs.DAL.Infrastructure;
 using TravelBlogs.DAL.Interfaces;
 
 namespace TravelBlogs.DAL.Repositories
@@ -26,6 +27,15 @@ namespace TravelBlogs.DAL.Repositories
             return _db.Posts;
         }
 
+        public IQueryable<Post> GetAll(PagingInfo paging)
+        {
+            paging.TotalItems = _db.Posts.Count();
+            return _db.Posts
+                .OrderBy(p => p.Id)
+                .Skip((paging.CurrentPage - 1)*paging.PageSize)
+                .Take(paging.PageSize);
+        }
+
         public Post Get(int id)
         {
             return _db.Posts.Find(id);
@@ -34,6 +44,16 @@ namespace TravelBlogs.DAL.Repositories
         public IQueryable<Post> Find(Expression<Func<Post, bool>> predicate)
         {
             return _db.Posts.Where(predicate);
+        }
+
+        public IQueryable<Post> Find(Expression<Func<Post, bool>> predicate, PagingInfo paging)
+        {
+            paging.TotalItems = _db.Posts.Where(predicate).Count();
+            return _db.Posts
+                .Where(predicate)
+                .OrderBy(p => p.Id)
+                .Skip((paging.CurrentPage - 1)*paging.PageSize)
+                .Take(paging.PageSize);
         }
 
         public void Create(Post item)

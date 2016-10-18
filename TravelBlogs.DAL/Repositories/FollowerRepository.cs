@@ -29,8 +29,16 @@ namespace TravelBlogs.DAL.Repositories
 
         public IQueryable<ApplicationUser> GetFollowersByUser(string userId)
         {
-            return _db.Followers.Where(f => f.StarUserId == userId).
-                                Select(f => f.FollowerUser);
+            return _db.Followers
+                .Where(f => f.StarUserId == userId)
+                .Select(f => f.FollowerUser);
+        }
+
+        public IQueryable<ApplicationUser> GetUserSubscriptions(string userId)
+        {
+            return _db.Followers
+                .Where(u => u.FollowerUserId == userId)
+                .Select(s => s.StarUser);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq.Expressions;
 using TravelBlogs.DAL.EF;
 using TravelBlogs.DAL.Entities;
+using TravelBlogs.DAL.Infrastructure;
 using TravelBlogs.DAL.Interfaces;
 
 namespace TravelBlogs.DAL.Repositories
@@ -26,6 +27,15 @@ namespace TravelBlogs.DAL.Repositories
             return _db.Places;
         }
 
+        public IQueryable<Place> GetAll(PagingInfo paging)
+        {
+            paging.TotalItems = _db.Places.Count();
+            return _db.Places
+                .OrderBy(p => p.Id)
+                .Skip((paging.CurrentPage - 1)*paging.PageSize)
+                .Take(paging.PageSize);
+        }
+
         public Place Get(int id)
         {
             return _db.Places.Find(id);
@@ -34,6 +44,16 @@ namespace TravelBlogs.DAL.Repositories
         public IQueryable<Place> Find(Expression<Func<Place, bool>> predicate)
         {
             return _db.Places.Where(predicate);
+        }
+
+        public IQueryable<Place> Find(Expression<Func<Place, bool>> predicate, PagingInfo paging)
+        {
+            paging.TotalItems = _db.Places.Where(predicate).Count();
+            return _db.Places
+                .Where(predicate)
+                .OrderBy(p => p.Id)
+                .Skip((paging.CurrentPage - 1)*paging.PageSize)
+                .Take(paging.PageSize);
         }
 
         public void Create(Place item)
@@ -59,7 +79,6 @@ namespace TravelBlogs.DAL.Repositories
         public IQueryable<Place> GetPlaces(int regionId)
         {
             return _db.Places.Where(p => p.RegionId == regionId);
-        }
-   
+        }  
     }
 }

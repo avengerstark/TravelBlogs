@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TravelBlogs.WEB.Models;
 using TravelBlogs.BLL.Interfaces;
 using TravelBlogs.BLL.DTO;
+using AutoMapper;
 
 namespace TravelBlogs.WEB.Controllers
 {
@@ -40,22 +41,17 @@ namespace TravelBlogs.WEB.Controllers
         [HttpPost]
         public ActionResult CreatePost(PostViewModel model)
         {
-            PostDTO post = new PostDTO
-            {
-                Title = model.Title,
-                Body = model.Body,
-                CreateDate = DateTime.Now,
-                ModificationDate = DateTime.Now,
-                IsApproved = true,
-                PlaceId = 1
-
-            };
+            model.CreateDate = DateTime.Now;
+            model.ModificationDate = DateTime.Now;
+            model.PlaceId = 1;
+            model.IsApproved = true;
+            PostDTO post = Mapper.Map<PostDTO>(model);
             if (!ModelState.IsValid)
             {
-                return View(post);
+                return View(model);
             }
             _travelService.Posts.Create(post);
-            _travelService.Save();
+            _travelService.SaveChanges();
             return RedirectToAction("Index","Home");
         }
         

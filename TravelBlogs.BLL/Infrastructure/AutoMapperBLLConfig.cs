@@ -1,82 +1,57 @@
 ﻿using AutoMapper;
 using TravelBlogs.BLL.DTO;
 using TravelBlogs.DAL.Entities;
+using TravelBlogs.BLL.Infrastructure;
+using TravelBlogs.DAL.Infrastructure;
 
 namespace TravelBlogs.BLL.Infrastructure
 {
-    public class AutoMapperBLLConfig
+
+    public class AutoMapperBLLConfig : AutoMapper.Profile
     {
-
-
-        public static void Configure()
+        public AutoMapperBLLConfig()
         {
-            RegisterMapping();
-        }
-
-        private static void RegisterMapping()
-        {
-            Mapper.Initialize(cfg =>
-            {
-
-                cfg.CreateMap<Country, CountryDTO>()
+            CreateMap<Country, CountryDTO>()
                     .ForMember(count => count.Regions, opt => opt.Ignore())
                     .ReverseMap();
-
-                cfg.CreateMap<Region, RegionDTO>()
+            CreateMap<Region, RegionDTO>()
                     .ForMember(reg => reg.Places, opt => opt.Ignore())
                     .ReverseMap();
-
-                cfg.CreateMap<Place, PlaceDTO>()
+            CreateMap<Place, PlaceDTO>()
                     .ForMember(pl => pl.Posts, opt => opt.Ignore());
-
-                cfg.CreateMap<PlaceDTO, Place>()
+            CreateMap<PlaceDTO, Place>()
                     .ForMember(pl => pl.Posts, opt => opt.Ignore());
-
-                cfg.CreateMap<Comment, CommentDTO>()
-                    .ForMember(c => c.User, opt => opt.MapFrom(u => u.ApplicationUser))
+            CreateMap<Comment, CommentDTO>()
+                .ForMember(c => c.User, opt => opt.MapFrom(u => u.ApplicationUser));
+            CreateMap<CoordinatesInfo, CoordinatesInfoDTO>()
                     .ReverseMap();
-
-                cfg.CreateMap<CoordinatesInfo, CoordinatesInfoDTO>()
+            CreateMap<Follower, FollowerDTO>()
                     .ReverseMap();
-
-                cfg.CreateMap<Follower, FollowerDTO>()
-                    .ReverseMap();
-
-                cfg.CreateMap<Post, PostDTO>()
+            CreateMap<Post, PostDTO>()
                     .ForMember(post => post.Commets, opt => opt.Ignore())
                     .ForMember(p => p.Votes, v => v.Ignore())
                     .ForMember(p => p.User, opt => opt.MapFrom(u => u.ApplicationUser))
                     .ReverseMap();
-
-                cfg.CreateMap<DAL.Entities.Profile, ProfileDTO>()
+            CreateMap<DAL.Entities.Profile, ProfileDTO>()
                     .ForMember(u => u.User, opt => opt.MapFrom(ap => ap.ApplicationUser))
                     .ReverseMap();
-
-                cfg.CreateMap<ReplayToComment, ReplayToCommentDTO>()
+            CreateMap<ReplayToComment, ReplayToCommentDTO>()
                     .ReverseMap();
-
-                cfg.CreateMap<ApplicationRole, RoleDTO>()
+            CreateMap<ApplicationRole, RoleDTO>()
                     .ReverseMap();
-
-                cfg.CreateMap<ApplicationUser, UserDTO>()
+            CreateMap<ApplicationUser, UserDTO>()
                     .ForMember(user => user.Role, opt => opt.Ignore())
                     .ForMember(u => u.Password, p => p.Ignore());
-
-                cfg.CreateMap<UserDTO, ApplicationUser>()
+            CreateMap<UserDTO, ApplicationUser>()
                     .ForMember(u => u.Comments, opt => opt.Ignore())
                     .ForMember(u => u.FollowerUsers, opt => opt.Ignore())
                     .ForMember(u => u.Posts, opt => opt.Ignore())
                     .ForMember(u => u.StarUsers, opt => opt.Ignore())
                     .ForMember(u => u.Votes, opt => opt.Ignore());
-
-                cfg.CreateMap<Vote, VoteDTO>()
+            CreateMap<Vote, VoteDTO>()
                     .ReverseMap();
-
-            });
-
-
-            Mapper.AssertConfigurationIsValid();
-    
-        } 
+            CreateMap<PagingInfo, PagingInfoDTO>()
+                .ReverseMap();
+        }
     }
 }

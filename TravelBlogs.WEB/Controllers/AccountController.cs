@@ -100,7 +100,7 @@ namespace TravelBlogs.WEB.Controllers
                 ValidationException validationDetails = await _travelService.Users.Create(userDto);
                 if (validationDetails.Succeed)
                 {
-                    _travelService.Save();
+                    _travelService.SaveChanges();
                     ClaimsIdentity claim = await _travelService.Users.Authenticate(model.Email, model.Password);
                     AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                     AuthenticationManager.SignIn(new AuthenticationProperties
