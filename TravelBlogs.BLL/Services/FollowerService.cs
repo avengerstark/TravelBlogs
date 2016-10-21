@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using TravelBlogs.BLL.Interfaces;
 using TravelBlogs.DAL.Interfaces;
 using TravelBlogs.BLL.DTO;
+using TravelBlogs.BLL.Infrastructure;
 using TravelBlogs.DAL.Entities;
 
 namespace TravelBlogs.BLL.Services
@@ -11,10 +13,11 @@ namespace TravelBlogs.BLL.Services
     public class FollowerService : IFollowerService
     {
         private readonly IUnitOfWork _db;
-
+        private readonly ICacheService _cacheService;
         public FollowerService(IUnitOfWork uow)
         {
             _db = uow;
+            _cacheService = new InMemoryCache();
         }
 
 
@@ -32,12 +35,18 @@ namespace TravelBlogs.BLL.Services
 
         public IEnumerable<UserDTO> GetFollowersByUser(string userId)
         {
-            return Mapper.Map<IQueryable<ApplicationUser>, IEnumerable<UserDTO>>(_db.Followers.GetFollowersByUser(userId));
+            return _cacheService.GetOrSet(String.Format("GetFollowersByUser{0}", userId),
+                () =>
+                    Mapper.Map<IQueryable<ApplicationUser>, IEnumerable<UserDTO>>(
+                        _db.Followers.GetFollowersByUser(userId)));
         }
 
         public IEnumerable<UserDTO> GetUserSubscriptions(string userId)
         {
-            return Mapper.Map<IQueryable<ApplicationUser>, IEnumerable<UserDTO>>(_db.Followers.GetUserSubscriptions(userId));
+            return _cacheService.GetOrSet(String.Format("GetUserSubscriptions{0}", userId),
+                () =>
+                    Mapper.Map<IQueryable<ApplicationUser>, IEnumerable<UserDTO>>(
+                        _db.Followers.GetUserSubscriptions(userId)));
         }
     }
 }

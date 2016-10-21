@@ -23,6 +23,7 @@ namespace TravelBlogs.BLL.Interfaces
         IEnumerable<RegionDTO> Find(Expression<Func<RegionDTO, Boolean>> predicate);
         IEnumerable<RegionDTO> Find(Expression<Func<RegionDTO, bool>> predicateDto, PagingInfoDTO pagingInfoDto);
         IEnumerable<RegionDTO> GetRegionsByCountry(int id);
+        IEnumerable<RegionDTO> GetRegionsByCountry(int id, PagingInfoDTO pagingInfoDto);
         RegionDTO GetRegion(int id);
         void CreateRegion(RegionDTO region);
         void UpdateRegion(RegionDTO region);

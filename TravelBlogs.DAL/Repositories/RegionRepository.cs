@@ -77,10 +77,5 @@ namespace TravelBlogs.DAL.Repositories
             }
         }
 
-        public IQueryable<Region> GetRegions(int countryId)
-        {
-            return _db.Regions.Where(r => r.CountryId == countryId);
-        }
-
     }
 }

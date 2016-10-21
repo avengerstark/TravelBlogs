@@ -59,6 +59,14 @@ namespace TravelBlogs.DAL.Repositories
                 .Take(paging.PageSize);
         }
 
+
+
+        public IQueryable<Comment> GetRepliesToComment(int id)
+        {
+            return _db.RepliesToComment.Where(c => c.MainCommentId == id)
+                .Select(c => c.RepliesToComment);
+        }
+
         public void Create(Comment comment)
         {
             _db.Comments.Add(comment);
@@ -78,26 +86,14 @@ namespace TravelBlogs.DAL.Repositories
             }
         }
 
-     
-        public IQueryable<Comment> GetRepliesToComment(int id)
-        {
-            return _db.RepliesToComment.Where(c => c.MainCommentId == id)
-                .Select(c=>c.RepliesToComment);
-        }
-
-        public IQueryable<Comment> GetCommentsByUser(string userId)
-        {
-            return _db.Comments.Where(c => c.UserId == userId).Select(com => com);
-        }
-
-        public IQueryable<Comment> GetCommetsByPost(int postId)
-        {
-            return _db.Comments.Where(c => c.PostId == postId).Select(com => com);
-        }
-
         public void AddReplayToComment(ReplayToComment replayToComment)
         {
             _db.RepliesToComment.Add(replayToComment);
+        }
+
+        public void DeleteReplayToComment(ReplayToComment replayToComment)
+        {
+            _db.RepliesToComment.Remove(replayToComment);
         }
     }
 }

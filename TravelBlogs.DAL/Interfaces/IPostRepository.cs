@@ -9,8 +9,6 @@ namespace TravelBlogs.DAL.Interfaces
 {
     public interface IPostRepository : IRepository<Post>
     {
-        IQueryable<Post> GetPostsByUser(string userId);
-
         void Evaluate(Vote vote);
         void DeleteEvaluate(Vote vote);
     }

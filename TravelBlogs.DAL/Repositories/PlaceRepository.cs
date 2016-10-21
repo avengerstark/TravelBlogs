@@ -73,12 +73,6 @@ namespace TravelBlogs.DAL.Repositories
             {
                 _db.Places.Remove(place);
             }
-        }
-
-
-        public IQueryable<Place> GetPlaces(int regionId)
-        {
-            return _db.Places.Where(p => p.RegionId == regionId);
-        }  
+        } 
     }
 }

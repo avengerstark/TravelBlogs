@@ -75,28 +75,15 @@ namespace TravelBlogs.DAL.Repositories
             }
         }
 
-
-
-
-        public IQueryable<Post> GetPostsByUser(string id)
-        {
-            return _db.Posts.Where(p => p.UserId == id);
-        }
-
-
-
         public void Evaluate(Vote vote)
         {
             _db.Votes.Add(vote);
         }
 
-
-
         public void DeleteEvaluate(Vote vote)
         {
             _db.Votes.Remove(vote);
         }
-
 
     }
 }

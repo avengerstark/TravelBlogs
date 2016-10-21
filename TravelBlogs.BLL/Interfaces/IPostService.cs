@@ -16,6 +16,9 @@ namespace TravelBlogs.BLL.Interfaces
         IEnumerable<PostDTO> Find(Expression<Func<PostDTO, Boolean>> predicate, PagingInfoDTO pagingInfoDto);
         IEnumerable<PostDTO> Find(Expression<Func<PostDTO, Boolean>> predicate);
         IEnumerable<PostDTO> GetPostsByUser(string userId);
+        IEnumerable<PostDTO> GetPostsByUser(string userId, PagingInfoDTO pagingInfoDto);
+        IEnumerable<PostDTO> GetPostsByPlace(int placeId);
+        IEnumerable<PostDTO> GetPostsByPlace(int placeId, PagingInfoDTO pagingInfoDto); 
         PostDTO Get(int id);
         void Create(PostDTO post);
         void Update(PostDTO post);
